@@ -1,0 +1,10 @@
+﻿  CG_Practice01.cpp
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(10,51): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(10,25): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(11,55): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(11,25): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(12,59): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(12,29): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(13,55): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice02\CG_Practice01.cpp(13,29): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CG_Practice02.vcxproj -> D:\Computer_Grapics\CG_Practice\Debug\CG_Practice02.exe

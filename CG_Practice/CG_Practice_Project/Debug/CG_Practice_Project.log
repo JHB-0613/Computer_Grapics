@@ -1,0 +1,18 @@
+﻿  Project01.cpp
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(11,10): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(238,30): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(239,30): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(439,36): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(463,21): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(521,14): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(522,14): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(523,14): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(524,14): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(544,42): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(545,56): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(545,42): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(546,48): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(628,21): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(629,23): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice_Project\Project01.cpp(991,25): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CG_Practice_Project.vcxproj -> D:\Computer_Grapics\CG_Practice\Debug\CG_Practice_Project.exe

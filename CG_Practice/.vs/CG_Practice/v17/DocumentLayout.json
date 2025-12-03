@@ -1,0 +1,357 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Computer_Grapics\\CG_Practice\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8B22D1B6-BA3E-4C07-972B-A023C04BF5D9}|CG_Practice_Project\\CG_Practice_Project.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice_Project\\Project01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8B22D1B6-BA3E-4C07-972B-A023C04BF5D9}|CG_Practice_Project\\CG_Practice_Project.vcxproj|solutionrelative:CG_Practice_Project\\Project01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8297F39A-6C2B-462E-9FE8-281F5C61766D}|CG_Practice05\\CG_Practice05.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8297F39A-6C2B-462E-9FE8-281F5C61766D}|CG_Practice05\\CG_Practice05.vcxproj|solutionrelative:CG_Practice05\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8297F39A-6C2B-462E-9FE8-281F5C61766D}|CG_Practice05\\CG_Practice05.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8297F39A-6C2B-462E-9FE8-281F5C61766D}|CG_Practice05\\CG_Practice05.vcxproj|solutionrelative:CG_Practice05\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8297F39A-6C2B-462E-9FE8-281F5C61766D}|CG_Practice05\\CG_Practice05.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8297F39A-6C2B-462E-9FE8-281F5C61766D}|CG_Practice05\\CG_Practice05.vcxproj|solutionrelative:CG_Practice05\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A10A92B-D0F2-4EED-8804-692B2C4D0819}|CG_Practice04\\CG_Practice04.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1A10A92B-D0F2-4EED-8804-692B2C4D0819}|CG_Practice04\\CG_Practice04.vcxproj|solutionrelative:CG_Practice04\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A10A92B-D0F2-4EED-8804-692B2C4D0819}|CG_Practice04\\CG_Practice04.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1A10A92B-D0F2-4EED-8804-692B2C4D0819}|CG_Practice04\\CG_Practice04.vcxproj|solutionrelative:CG_Practice04\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A10A92B-D0F2-4EED-8804-692B2C4D0819}|CG_Practice04\\CG_Practice04.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1A10A92B-D0F2-4EED-8804-692B2C4D0819}|CG_Practice04\\CG_Practice04.vcxproj|solutionrelative:CG_Practice04\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4761A24C-2B54-46BA-8A93-A9EFE1FE67CC}|CG_Practice03\\CG_Practice03.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4761A24C-2B54-46BA-8A93-A9EFE1FE67CC}|CG_Practice03\\CG_Practice03.vcxproj|solutionrelative:CG_Practice03\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4761A24C-2B54-46BA-8A93-A9EFE1FE67CC}|CG_Practice03\\CG_Practice03.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4761A24C-2B54-46BA-8A93-A9EFE1FE67CC}|CG_Practice03\\CG_Practice03.vcxproj|solutionrelative:CG_Practice03\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4761A24C-2B54-46BA-8A93-A9EFE1FE67CC}|CG_Practice03\\CG_Practice03.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4761A24C-2B54-46BA-8A93-A9EFE1FE67CC}|CG_Practice03\\CG_Practice03.vcxproj|solutionrelative:CG_Practice03\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice05.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|solutionrelative:CG_Practice02\\CG_Practice05.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice04.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|solutionrelative:CG_Practice\\CG_Practice04.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|solutionrelative:CG_Practice\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|solutionrelative:CG_Practice\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|solutionrelative:CG_Practice\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|solutionrelative:CG_Practice02\\CG_Practice01.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{87942E72-E562-4CE2-9986-16EEF8E0B742}|CG_Practice\\CG_Practice.vcxproj|solutionrelative:CG_Practice\\CG_Practice.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|solutionrelative:CG_Practice02\\CG_Practice02.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|solutionrelative:CG_Practice02\\CG_Practice03.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice04.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|solutionrelative:CG_Practice02\\CG_Practice04.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice06.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{20BE33A5-9E69-4D53-B128-4324CA0BEB18}|CG_Practice02\\CG_Practice02.vcxproj|solutionrelative:CG_Practice02\\CG_Practice06.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Project01.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice_Project\\Project01.cpp",
+              "RelativeDocumentMoniker": "CG_Practice_Project\\Project01.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice_Project\\Project01.cpp",
+              "RelativeToolTip": "CG_Practice_Project\\Project01.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-02T12:12:41.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CG_Practice03.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice03.cpp",
+              "RelativeDocumentMoniker": "CG_Practice05\\CG_Practice03.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice03.cpp",
+              "RelativeToolTip": "CG_Practice05\\CG_Practice03.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-27T08:41:39.139Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CG_Practice02.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice02.cpp",
+              "RelativeDocumentMoniker": "CG_Practice05\\CG_Practice02.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice02.cpp",
+              "RelativeToolTip": "CG_Practice05\\CG_Practice02.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-27T08:35:44.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CG_Practice01.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice01.cpp",
+              "RelativeDocumentMoniker": "CG_Practice05\\CG_Practice01.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice05\\CG_Practice01.cpp",
+              "RelativeToolTip": "CG_Practice05\\CG_Practice01.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-27T07:46:31.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CG_Practice03.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice03.cpp",
+              "RelativeDocumentMoniker": "CG_Practice04\\CG_Practice03.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice03.cpp",
+              "RelativeToolTip": "CG_Practice04\\CG_Practice03.cpp",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAFMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-24T07:13:51.638Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CG_Practice02.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice02.cpp",
+              "RelativeDocumentMoniker": "CG_Practice04\\CG_Practice02.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice02.cpp",
+              "RelativeToolTip": "CG_Practice04\\CG_Practice02.cpp",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAYwD0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-24T07:10:59.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CG_Practice01.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice01.cpp",
+              "RelativeDocumentMoniker": "CG_Practice04\\CG_Practice01.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice04\\CG_Practice01.cpp",
+              "RelativeToolTip": "CG_Practice04\\CG_Practice01.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-24T06:45:05.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CG_Practice03.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice03.cpp",
+              "RelativeDocumentMoniker": "CG_Practice03\\CG_Practice03.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice03.cpp",
+              "RelativeToolTip": "CG_Practice03\\CG_Practice03.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-06T08:24:19.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CG_Practice02.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice02.cpp",
+              "RelativeDocumentMoniker": "CG_Practice03\\CG_Practice02.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice02.cpp",
+              "RelativeToolTip": "CG_Practice03\\CG_Practice02.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-06T08:22:32.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CG_Practice01.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice01.cpp",
+              "RelativeDocumentMoniker": "CG_Practice03\\CG_Practice01.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice03\\CG_Practice01.cpp",
+              "RelativeToolTip": "CG_Practice03\\CG_Practice01.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-06T07:25:09.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CG_Practice04.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice04.cpp",
+              "RelativeDocumentMoniker": "CG_Practice\\CG_Practice04.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice04.cpp",
+              "RelativeToolTip": "CG_Practice\\CG_Practice04.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACUAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-29T17:02:03.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CG_Practice03.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice03.cpp",
+              "RelativeDocumentMoniker": "CG_Practice\\CG_Practice03.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice03.cpp",
+              "RelativeToolTip": "CG_Practice\\CG_Practice03.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-29T17:02:04.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CG_Practice02.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice02.cpp",
+              "RelativeDocumentMoniker": "CG_Practice\\CG_Practice02.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice02.cpp",
+              "RelativeToolTip": "CG_Practice\\CG_Practice02.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-29T16:41:10.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CG_Practice01.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice01.cpp",
+              "RelativeDocumentMoniker": "CG_Practice\\CG_Practice01.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice01.cpp",
+              "RelativeToolTip": "CG_Practice\\CG_Practice01.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-29T16:19:37.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CG_Practice01.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice01.cpp",
+              "RelativeDocumentMoniker": "CG_Practice02\\CG_Practice01.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice01.cpp",
+              "RelativeToolTip": "CG_Practice02\\CG_Practice01.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T05:49:36.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CG_Practice.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice.cpp",
+              "RelativeDocumentMoniker": "CG_Practice\\CG_Practice.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice\\CG_Practice.cpp",
+              "RelativeToolTip": "CG_Practice\\CG_Practice.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-29T16:11:48.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CG_Practice06.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice06.cpp",
+              "RelativeDocumentMoniker": "CG_Practice02\\CG_Practice06.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice06.cpp",
+              "RelativeToolTip": "CG_Practice02\\CG_Practice06.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T06:03:59.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CG_Practice05.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice05.cpp",
+              "RelativeDocumentMoniker": "CG_Practice02\\CG_Practice05.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice05.cpp",
+              "RelativeToolTip": "CG_Practice02\\CG_Practice05.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T05:58:39.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CG_Practice04.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice04.cpp",
+              "RelativeDocumentMoniker": "CG_Practice02\\CG_Practice04.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice04.cpp",
+              "RelativeToolTip": "CG_Practice02\\CG_Practice04.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T06:04:51.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CG_Practice03.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice03.cpp",
+              "RelativeDocumentMoniker": "CG_Practice02\\CG_Practice03.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice03.cpp",
+              "RelativeToolTip": "CG_Practice02\\CG_Practice03.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T05:55:50.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CG_Practice02.cpp",
+              "DocumentMoniker": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice02.cpp",
+              "RelativeDocumentMoniker": "CG_Practice02\\CG_Practice02.cpp",
+              "ToolTip": "D:\\Computer_Grapics\\CG_Practice\\CG_Practice02\\CG_Practice02.cpp",
+              "RelativeToolTip": "CG_Practice02\\CG_Practice02.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T05:54:19.969Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

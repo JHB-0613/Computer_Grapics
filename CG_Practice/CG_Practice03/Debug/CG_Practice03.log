@@ -1,0 +1,7 @@
+﻿  CG_Practice01.cpp
+D:\Computer_Grapics\CG_Practice\CG_Practice03\CG_Practice01.cpp(18,4): warning C4305: '초기화 중': 'double'에서 'GLfloat'(으)로 잘립니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice03\CG_Practice01.cpp(18,9): warning C4305: '초기화 중': 'double'에서 'GLfloat'(으)로 잘립니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice03\CG_Practice01.cpp(18,14): warning C4305: '초기화 중': 'double'에서 'GLfloat'(으)로 잘립니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice03\CG_Practice01.cpp(72,15): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+D:\Computer_Grapics\CG_Practice\CG_Practice03\CG_Practice01.cpp(81,15): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+  CG_Practice03.vcxproj -> D:\Computer_Grapics\CG_Practice\Debug\CG_Practice03.exe
