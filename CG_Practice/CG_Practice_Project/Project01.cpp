@@ -13,15 +13,11 @@
 #include "stb_image.h"
 
 float heights[TERRAIN_SIZE][TERRAIN_SIZE] = { 0.0f }; // 높이 데이터 배열
-const float HEIGHT_SCALE = 1.0f; // 높이를 월드 좌표로 변환할 스케일 팩터
 const float RAMP_START_X = WALL_SIZE * 0.5f; // 경사로 시작 X 
 const float RAMP_START_Z = WALL_SIZE * 11.0f; // 경사로 시작 Z
 const float RAMP_LENGTH_Z = WALL_SIZE * 5.0f; // Z축으로 2칸 길이
 const float RAMP_WIDTH_X = WALL_SIZE; // X축 너비 
 const float RAMP_HEIGHT = 3.0f; // 경사로 최대 높이
-
-void GenerateSimpleHeightmap();
-void RenderTerrain();
 
 
 // 미로 맵 데이터 (1: 벽, 0: 통로)
@@ -62,9 +58,7 @@ float angle = 90.0f;
 static int lastTime = 0; // 이전 프레임의 시간 저장
 // float moveSpeed = 0.01f;
 float moveSpeed = 8.0f; // 예시: 초당 이동 속도 (5.0f units/sec)
-float rotateSpeed = 4.0f;
-float mouseSensitivity = 0.05f; // 마우스 움직임에 따른 회전 감도 (조절 가능)
-int lastMouseX; // 마우스 커서의 마지막 X 좌표 저장
+float mouseSensitivity = 0.05f; // 마우스 움직임에 따른 회전 감도
 float pitchAngle = 0.0f; //  수직 시점 각도
 
 // --- 텍스처 및 HUD 변수 ---
@@ -194,20 +188,6 @@ void LoadAllTextures() {
 // 1. 렌더링 함수
 // ----------------------------------------------------
 
-// 플레이어 위치(x, z)에서 지형의 높이를 얻는 함수
-float GetTerrainHeight(float x, float z) {
-    // 플레이어의 현재 월드 좌표를 미로 셀 인덱스로 변환
-    int j_cell = (int)(x / WALL_SIZE);
-    int i_cell = (int)(z / WALL_SIZE);
-
-    // 배열 경계 체크
-    if (i_cell < 0 || i_cell >= TERRAIN_SIZE || j_cell < 0 || j_cell >= TERRAIN_SIZE) {
-        return 0.0f; // 경계 밖이면 기본 높이 0 반환
-    }
-
-    return heights[i_cell][j_cell];
-}
-
 // 경사로를 렌더링하는 함수 (삼각형 스트립 사용)
 void RenderRamp() {
     glEnable(GL_TEXTURE_2D);
@@ -313,56 +293,6 @@ void DrawTexturedWall(float size) {
 
     // 윗면 (Y = +s2), 아랫면 (Y = -s2)도 필요에 따라 구현
     glEnd();
-    glDisable(GL_TEXTURE_2D);
-}
-
-void GenerateSimpleHeightmap() {
-    for (int i = 0; i < TERRAIN_SIZE; ++i) {
-        for (int j = 0; j < TERRAIN_SIZE; ++j) {
-            // 미로 맵 데이터 (1: 벽, 0: 통로)를 그대로 높이로 사용
-            heights[i][j] = maze_map[i][j] * HEIGHT_SCALE; // 벽은 1.0f 높이, 통로는 0.0f 높이
-
-            // 높이 변화를 좀 더 부드럽게 만들기 위해,
-            // 주변 통로와 벽의 경계에 있는 지점의 높이를 조정할 수 있습니다.
-            // 여기서는 단순하게 미로 맵 데이터만 사용합니다.
-        }
-    }
-    std::cout << "DEBUG: Simple heightmap generated." << std::endl;
-}
-
-// 높이 맵 기반 지형 렌더링 함수
-void RenderTerrain() {
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, floor_texture_id); // 바닥 텍스처 사용
-    glColor3f(1.0f, 1.0f, 1.0f);
-
-    float scale = WALL_SIZE;
-    float texture_repeat = TERRAIN_SIZE;
-
-    // 지형의 각 셀을 삼각형 스트립으로 그립니다.
-    for (int i = 0; i < TERRAIN_SIZE - 1; ++i) {
-        glBegin(GL_TRIANGLE_STRIP);
-        for (int j = 0; j < TERRAIN_SIZE; ++j) {
-
-            // 1. (i, j) 정점
-            float x1 = j * scale;
-            float z1 = i * scale;
-            float y1 = heights[i][j];
-
-            glTexCoord2f((float)j / TERRAIN_SIZE * texture_repeat, (float)i / TERRAIN_SIZE * texture_repeat);
-            glVertex3f(x1, y1, z1);
-
-            // 2. (i+1, j) 정점
-            float x2 = j * scale;
-            float z2 = (i + 1) * scale;
-            float y2 = heights[i + 1][j];
-
-            glTexCoord2f((float)j / TERRAIN_SIZE * texture_repeat, (float)(i + 1) / TERRAIN_SIZE * texture_repeat);
-            glVertex3f(x2, y2, z2);
-        }
-        glEnd();
-    }
-
     glDisable(GL_TEXTURE_2D);
 }
 
@@ -611,11 +541,9 @@ void DrawTexturedCube(float size, GLuint textureID) {
 }
 
 // --- 충돌 감지 및 모델 상태 변수 추가 ---
-bool isModelVisible = true; // 모델의 표시 여부
 float modelCollisionRadius = 3.0f; // 모델의 충돌 감지 반경
 float playerRadius = 0.2f; // 플레이어 충돌 반경
 // 모델의 월드 좌표를 저장
-bool hasWonModel = false; //총 획득 개수
 bool isGameOver = false;  // 게임 종료(승리) 상태 여부
 
 // 미로 출구 좌표 (예: i=4, j=9 통로 중앙)
@@ -968,7 +896,6 @@ void init() {
     int boxModelIndex = -1;
     int chestModelIndex = LoadSORModel("Bin/Treasure_Chest.dat");
 
-    GenerateSimpleHeightmap();
 
     UpdateDirection();
 
