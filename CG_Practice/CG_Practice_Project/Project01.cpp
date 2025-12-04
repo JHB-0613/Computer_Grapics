@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <string>  
+#include <ctime>
 #include "stb_image.h"
 
 float heights[TERRAIN_SIZE][TERRAIN_SIZE] = { 0.0f }; // 높이 데이터 배열
@@ -57,7 +58,10 @@ float dirY = 0.0f;
 float dirZ = -1.0f;
 
 float angle = 90.0f;
-float moveSpeed = 0.05f;
+// --- 시간 측정 변수 (전역 또는 정적) ---
+static int lastTime = 0; // 이전 프레임의 시간 저장
+// float moveSpeed = 0.01f;
+float moveSpeed = 8.0f; // 예시: 초당 이동 속도 (5.0f units/sec)
 float rotateSpeed = 4.0f;
 float mouseSensitivity = 0.05f; // 마우스 움직임에 따른 회전 감도 (조절 가능)
 int lastMouseX; // 마우스 커서의 마지막 X 좌표 저장
@@ -970,6 +974,7 @@ void init() {
 
     // 모델 인덱스와 텍스처 ID를 InitModels에 모두 전달
     InitModels(barrelModelIndex, DrumModelIndex, boxModelIndex, chestModelIndex, barrel_tex_id, drum_tex_id, box_tex_id, chest_tex_id);
+    lastTime = glutGet(GLUT_ELAPSED_TIME);
 }
 
 float GetRampHeight(float x, float z) {
@@ -1004,45 +1009,44 @@ void IdleFunc(void) {
         return;
     }
 
+    // 1. 델타 시간(Delta Time) 계산
+    int currentTime = glutGet(GLUT_ELAPSED_TIME);
+    int deltaTimeMs = currentTime - lastTime;
+    float deltaTime = deltaTimeMs / 1000.0f; // 밀리초를 초 단위로 변환
+    lastTime = currentTime;
+
+    // 2. 이동 속도 조정 (프레임 독립적)
+    // 기존 moveSpeed(0.01f) 대신 초당 이동 거리로 설정한 moveSpeed를 사용합니다.
+    // 초당 이동 거리 (moveSpeed) * 시간 간격 (deltaTime)
+    float currentMoveDistance = moveSpeed * deltaTime; // 이 값이 실제 이동 거리입니다.
+
     bool hasMoved = false;
     float nextCamX = camX;
     float nextCamZ = camZ;
-    float prevCamX = camX;
-    float prevCamZ = camZ;
 
-    float currentMoveSpeed = moveSpeed;
     float strafeX = dirZ;
     float strafeZ = -dirX;
 
-    // ... (키 상태에 따른 nextCamX/Z 계산 로직 유지) ...
-    // 이 부분에서 hasMoved가 true로 설정되었다고 가정합니다.
+    // 3. 키 상태 확인 및 이동 벡터 계산 (currentMoveDistance 사용)
+    if (isWPressed) { nextCamX += dirX * currentMoveDistance; nextCamZ += dirZ * currentMoveDistance; hasMoved = true; }
+    if (isSPressed) { nextCamX -= dirX * currentMoveDistance; nextCamZ -= dirZ * currentMoveDistance; hasMoved = true; }
+    if (isDPressed) { nextCamX -= strafeX * currentMoveDistance; nextCamZ -= strafeZ * currentMoveDistance; hasMoved = true; }
+    if (isAPressed) { nextCamX += strafeX * currentMoveDistance; nextCamZ += strafeZ * currentMoveDistance; hasMoved = true; }
 
-    // 키 상태 확인 및 이동 벡터 계산 (예시)
-    if (isWPressed) { nextCamX += dirX * currentMoveSpeed; nextCamZ += dirZ * currentMoveSpeed; hasMoved = true; }
-    if (isSPressed) { nextCamX -= dirX * currentMoveSpeed; nextCamZ -= dirZ * currentMoveSpeed; hasMoved = true; }
-    if (isDPressed) { nextCamX -= strafeX * currentMoveSpeed; nextCamZ -= strafeZ * currentMoveSpeed; hasMoved = true; }
-    if (isAPressed) { nextCamX += strafeX * currentMoveSpeed; nextCamZ += strafeZ * currentMoveSpeed; hasMoved = true; }
-
-    // 2. 충돌 체크 및 위치 업데이트
+    // 4. 충돌 체크 및 위치 업데이트 (이하 기존 로직 유지)
     if (hasMoved) {
-        float movedSuccessfully = false; // **[추가]** 실제 이동 성공 여부
+        // ... (충돌 체크 및 camX, camZ 업데이트 로직)
+
         if (!CheckCollision(nextCamX, nextCamZ)) {
             camX = nextCamX;
             camZ = nextCamZ;
-            movedSuccessfully = true; // 이동 성공
         }
 
         // 카메라 Y 높이 업데이트
         float ground_height = GetRampHeight(camX, camZ);
         camY = ground_height + 1.7f;
 
-        // 이동에 성공했을 때만 속도 값을 기록합니다.
-        if (hasMoved) {
-
-            CheckGameState();
-        }
-
-        // 3. 화면 갱신 요청
+        CheckGameState();
         glutPostRedisplay();
     }
 }
