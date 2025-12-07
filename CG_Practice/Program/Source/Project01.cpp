@@ -223,7 +223,7 @@ void InitModels(int barrelIdx, int drumIdx, int boxIdx, int chestIdx, GLuint bar
     models.clear();
 
     models.push_back({
-        WALL_SIZE * 1.0f, 0.0f, WALL_SIZE * 3.0f, true, false,
+        WALL_SIZE * 17.0f, 0.0f, WALL_SIZE * 11.0f, true, false,
         barrelIdx, barrelTexID,
         0.03f, 0.02f, 0.03f
         });
@@ -240,7 +240,7 @@ void InitModels(int barrelIdx, int drumIdx, int boxIdx, int chestIdx, GLuint bar
         1.5f, 1.5f, 1.5f
         });
     models.push_back({
-    WALL_SIZE * 17.0f, 0.0f, WALL_SIZE * 11.0f, true, false,
+    WALL_SIZE * 11.0f, 0.0f, WALL_SIZE * 3.0f, true, false,
     chestIdx, chestTexID,
     0.05f, 0.05f, 0.05f
         });
