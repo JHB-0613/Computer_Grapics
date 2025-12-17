@@ -3,55 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>컴퓨터 그래픽스 기말고사 대비 퀴즈 (Ch.07-10)</title>
+    <title>컴퓨터 그래픽스 마스터 퀴즈 (Ch.07-10)</title>
     <style>
         body {
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background-color: #f0f2f5;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .menu-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .menu-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #fff;
+            border: 2px solid #4a90e2;
+            color: #4a90e2;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .menu-btn:hover, .menu-btn.active {
+            background-color: #4a90e2;
+            color: white;
+            box-shadow: 0 4px 6px rgba(74, 144, 226, 0.3);
         }
         .quiz-container {
             background-color: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            width: 90%;
+            width: 100%;
             max-width: 700px;
+            display: none; /* 초기에는 숨김 */
         }
-        .progress {
-            font-size: 0.9em;
-            color: #666;
+        .quiz-container.active {
+            display: block;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
             margin-bottom: 10px;
-            text-align: right;
+            overflow: hidden;
         }
-        .question {
-            font-size: 1.3em;
+        .progress-fill {
+            height: 100%;
+            background-color: #4a90e2;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .question-text {
+            font-size: 1.2em;
             font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-            line-height: 1.4;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            line-height: 1.5;
         }
         .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         .option-btn {
             padding: 15px;
             font-size: 1em;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            border: 2px solid #e1e4e8;
+            border-radius: 10px;
             background-color: white;
             cursor: pointer;
             transition: all 0.2s;
             text-align: left;
+            position: relative;
         }
         .option-btn:hover:not(:disabled) {
-            background-color: #f0f8ff;
+            background-color: #f8f9fa;
             border-color: #4a90e2;
         }
         .option-btn.correct {
@@ -66,248 +114,244 @@
         }
         .explanation {
             margin-top: 20px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            display: none;
-            font-size: 0.95em;
-            line-height: 1.5;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
             border-left: 5px solid #4a90e2;
+            display: none;
+            line-height: 1.6;
+            color: #333;
         }
         .controls {
             display: flex;
             justify-content: space-between;
-            margin-top: 25px;
+            margin-top: 30px;
         }
         .control-btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 1em;
             background-color: #4a90e2;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
         }
         .control-btn:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
-        .control-btn:hover:not(:disabled) {
-            background-color: #357abd;
+        .intro-text {
+            text-align: center;
+            color: #666;
+            margin-top: 50px;
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="progress" id="progress">문제 1 / 10</div>
-    <div class="question" id="question-text">문제 내용이 여기에 표시됩니다.</div>
-    <div class="options" id="options-container">
-        </div>
-    <div class="explanation" id="explanation">
-        </div>
-    <div class="controls">
-        <button class="control-btn" id="prev-btn" onclick="changeQuestion(-1)">이전</button>
-        <button class="control-btn" id="next-btn" onclick="changeQuestion(1)">다음</button>
+    <h1>🖥️ CG 기말고사 대비 문제은행</h1>
+
+    <div class="menu-container">
+        <button class="menu-btn" onclick="startQuiz('ch7')">7장: 3D Viewing</button>
+        <button class="menu-btn" onclick="startQuiz('ch8')">8장: 은면 제거</button>
+        <button class="menu-btn" onclick="startQuiz('ch9')">9장: 조명 모델</button>
+        <button class="menu-btn" onclick="startQuiz('ch10')">10장: 셰이딩</button>
+        <button class="menu-btn" onclick="startQuiz('all')">🏆 전체 종합 (20문제)</button>
     </div>
-</div>
+
+    <div id="intro-msg" class="intro-text">
+        위 메뉴에서 풀고 싶은 챕터를 선택해주세요.<br>
+        전체 종합 문제는 모든 챕터에서 랜덤으로 출제됩니다.
+    </div>
+
+    <div class="quiz-container" id="quiz-box">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="question-header">
+            <span id="chapter-badge">Chapter 7</span>
+            <span id="q-number">1 / 10</span>
+        </div>
+        <div class="question-text" id="q-text">질문이 여기에 나옵니다.</div>
+        <div class="options" id="options-box">
+            </div>
+        <div class="explanation" id="explanation-box"></div>
+        
+        <div class="controls">
+            <button class="control-btn" id="prev-btn" onclick="changeQuestion(-1)">이전</button>
+            <button class="control-btn" id="next-btn" onclick="changeQuestion(1)">다음</button>
+        </div>
+    </div>
 
 <script>
-    const quizData = [
-        {
-            question: "1. [Ch.07] 3D 그래픽스 뷰잉 파이프라인(Viewing Pipeline)의 올바른 좌표 변환 순서는?",
-            options: [
-                "MC → WC → PC → VC → NC → DC",
-                "MC → WC → VC → PC → NC → DC",
-                "WC → MC → VC → PC → NC → DC",
-                "MC → VC → WC → PC → NC → DC"
-            ],
-            answer: 1,
-            explanation: "<strong>정답: 2번</strong><br>3D 파이프라인의 정석 순서입니다.<br>1. 모델 좌표(MC)를 월드(WC)에 배치<br>2. 카메라 기준인 뷰잉 좌표(VC)로 변환<br>3. 투영 좌표(PC)로 변환<br>4. 정규화 장치 좌표(NC)로 변환<br>5. 최종 화면 좌표(DC)로 변환합니다."
-        },
-        {
-            question: "2. [Ch.07] 직교 투영(Orthographic Projection)에 대한 설명으로 틀린 것은?",
-            options: [
-                "원근감이 없어 물체의 거리에 상관없이 크기가 일정하다.",
-                "뷰 볼륨(View Volume)의 형태는 직육면체(Rectangular Box)이다.",
-                "투영선(Projector)들이 투영면에 수직으로 평행하다.",
-                "주로 사실적인 게임 그래픽이나 영화 렌더링에 사용된다."
-            ],
-            answer: 3,
-            explanation: "<strong>정답: 4번</strong><br>사실적인 그래픽이나 게임, 사람의 눈과 같은 효과를 내는 것은 '원근 투영(Perspective Projection)'입니다. 직교 투영은 정확한 치수가 필요한 설계 도면(CAD) 등에 주로 사용됩니다."
-        },
-        {
-            question: "3. [Ch.07] 카메라(UVN) 좌표계를 구성하기 위해 필요한 3가지 요소가 아닌 것은?",
-            options: [
-                "View Point (눈의 위치, P0)",
-                "Look-at Point (바라보는 지점, Pref)",
-                "Field of View (시야각)",
-                "View-Up Vector (위쪽 방향 벡터, V)"
-            ],
-            answer: 2,
-            explanation: "<strong>정답: 3번</strong><br>UVN 좌표계(카메라의 x, y, z축)를 정의하기 위해 필요한 기하학적 정보는 위치(Eye), 바라보는 곳(Look-at), 위쪽 방향(Up)입니다. 시야각(FOV)은 '투영(Projection)' 단계에서 렌즈의 줌인/줌아웃을 결정하는 요소입니다."
-        },
-        {
-            question: "4. [Ch.08] 은면 제거 알고리즘 중 'Z-버퍼(Z-Buffer)' 기법에 대한 설명으로 옳은 것은?",
-            options: [
-                "Object-Space 알고리즘에 해당한다.",
-                "반드시 물체들을 깊이 순서대로 정렬(Sorting)해야 한다.",
-                "추가적인 메모리 공간이 필요하다.",
-                "순환 겹침(Cyclic Overlap) 문제를 해결할 수 없다."
-            ],
-            answer: 2,
-            explanation: "<strong>정답: 3번</strong><br>1. Z-버퍼는 Image-Space(픽셀 단위) 알고리즘입니다.<br>2. 정렬이 필요 없는 것이 가장 큰 장점입니다.<br>3. 깊이 정보를 저장할 버퍼 메모리가 추가로 필요합니다.<br>4. 픽셀 단위로 깊이를 비교하므로 순환 겹침 문제도 완벽하게 해결합니다."
-        },
-        {
-            question: "5. [Ch.08] 후면 제거(Back-Face Culling)를 위해 사용하는 벡터 연산은 무엇인가?",
-            options: [
-                "법선 벡터(N)와 시선 벡터(V)의 내적 (Dot Product)",
-                "법선 벡터(N)와 시선 벡터(V)의 외적 (Cross Product)",
-                "광원 벡터(L)와 법선 벡터(N)의 내적 (Dot Product)",
-                "반사 벡터(R)와 시선 벡터(V)의 내적 (Dot Product)"
-            ],
-            answer: 0,
-            explanation: "<strong>정답: 1번</strong><br>면이 카메라를 향하는지 등지는지를 판단하기 위해 면의 법선(N)과 시선(V)의 내적을 계산합니다.<br>- 3번(N·L)은 Diffuse 조명 계산입니다.<br>- 4번(R·V)은 Specular 조명 계산입니다."
-        },
-        {
-            question: "6. [Ch.09] 퐁 조명 모델(Phong Reflection Model)의 3가지 요소에 해당하지 않는 것은?",
-            options: [
-                "Ambient (주변광)",
-                "Diffuse (난반사/확산광)",
-                "Specular (정반사)",
-                "Emission (방사광)"
-            ],
-            answer: 3,
-            explanation: "<strong>정답: 4번</strong><br>기본적인 퐁 반사 모델은 Ambient + Diffuse + Specular의 합으로 구성됩니다. Emission(자체 발광)은 OpenGL 등에서 추가적으로 더해줄 수는 있지만, 빛의 반사를 다루는 핵심 3요소에는 포함되지 않는 경우가 일반적입니다."
-        },
-        {
-            question: "7. [Ch.09] 정반사(Specular) 하이라이트를 계산할 때, 표면의 매끄러운 정도(Shininess)를 조절하는 지수 'n'값이 커지면 어떤 현상이 발생하는가?",
-            options: [
-                "하이라이트 영역이 넓어지고 흐릿해진다.",
-                "하이라이트 영역이 좁아지고 선명해진다.",
-                "전체적으로 물체가 어두워진다.",
-                "난반사(Diffuse) 성분이 사라진다."
-            ],
-            answer: 1,
-            explanation: "<strong>정답: 2번</strong><br>지수 n은 표면의 거칠기를 나타냅니다. n이 클수록 표면이 매끄러운 거울에 가까워지므로, 빛이 퍼지지 않고 정반사되어 하이라이트가 좁고 날카롭게(선명하게) 맺힙니다."
-        },
-        {
-            question: "8. [Ch.10] 셰이딩 기법 중, '꼭짓점(Vertex)에서 색상을 계산하고 내부는 색상을 보간(Interpolation)'하는 방식은?",
-            options: [
-                "Flat Shading",
-                "Gouraud Shading",
-                "Phong Shading",
-                "Ray Tracing"
-            ],
-            answer: 1,
-            explanation: "<strong>정답: 2번</strong><br>1. Flat: 면 하나를 단색으로 칠함.<br>2. Gouraud: 정점 색상(Intensity)을 구해서 내부를 보간함.<br>3. Phong: 법선 벡터(Normal)를 보간해서 픽셀마다 계산함."
-        },
-        {
-            question: "9. [Ch.10] 퐁 셰이딩(Phong Shading)의 가장 큰 장점은 무엇인가?",
-            options: [
-                "계산 속도가 가장 빠르다.",
-                "마하 밴드(Mach Band) 현상이 매우 심하게 나타난다.",
-                "하이라이트(Specular)를 픽셀 단위로 정확하게 표현한다.",
-                "폴리곤 내부를 단색으로 처리하여 깔끔하다."
-            ],
-            answer: 2,
-            explanation: "<strong>정답: 3번</strong><br>고로 셰이딩은 정점에서만 계산하므로 폴리곤 중앙의 하이라이트가 뭉개질 수 있습니다. 반면 퐁 셰이딩은 픽셀마다 법선을 보간하여 조명을 계산하므로 하이라이트가 매우 정확하고 사실적입니다. 단점은 계산량이 많아 느리다는 것입니다."
-        },
-        {
-            question: "10. [Ch.10] 3D 렌더링 시 물체 경계선이 계단처럼 보이는 현상(Aliasing)을 줄이기 위해, 경계면의 색상을 혼합하여 부드럽게 만드는 기술은?",
-            options: [
-                "Z-Buffering",
-                "Back-Face Culling",
-                "Anti-Aliasing",
-                "Perspective Division"
-            ],
-            answer: 2,
-            explanation: "<strong>정답: 3번</strong><br>앨리어싱(Aliasing)의 반대말인 안티앨리어싱(Anti-Aliasing)입니다. 슈퍼샘플링 등의 기법을 사용하여 픽셀의 색상을 주변과 혼합(Blending)함으로써 계단 현상을 완화합니다."
-        }
-    ];
+    // --- 문제 데이터베이스 (챕터별 10문제) ---
+    const db = {
+        ch7: [
+            { q: "3D 그래픽스 뷰잉 파이프라인의 좌표 변환 순서로 올바른 것은?", o: ["MC → WC → PC → VC → NC", "MC → WC → VC → PC → NC", "WC → MC → VC → PC → NC", "MC → VC → WC → PC → NC"], a: 1, e: "정답: MC(모델) → WC(월드) → VC(뷰잉/카메라) → PC(투영) → NC(정규화) 순서입니다." },
+            { q: "카메라(Viewing) 좌표계(UVN)를 설정하기 위해 필요한 3요소가 아닌 것은?", o: ["View Point (눈의 위치)", "Look-at Point (바라보는 점)", "View-Up Vector (위쪽 방향)", "Field of View (시야각)"], a: 3, e: "UVN 좌표축(n, u, v)을 만들기 위해서는 위치(P0), 시선(Pref), 위쪽 벡터(V)가 필요합니다. 시야각(FOV)은 투영 단계에서 쓰입니다." },
+            { q: "직교 투영(Orthographic Projection)의 특징이 아닌 것은?", o: ["원근감이 없다.", "설계 도면(CAD)에 주로 쓰인다.", "뷰 볼륨이 절두체(Frustum) 모양이다.", "투영선이 투영면과 수직이다."], a: 2, e: "직교 투영의 뷰 볼륨은 '직육면체(Rectangular Box)'입니다. 절두체는 원근 투영입니다." },
+            { q: "원근 투영(Perspective Projection)에서 물체의 원근감을 결정짓는 핵심 요소는?", o: ["모든 투영선이 하나의 점(COP)으로 모인다.", "투영선이 서로 평행하다.", "z값에 상관없이 크기가 일정하다.", "뷰 평면이 물체 뒤에 있다."], a: 0, e: "원근 투영은 모든 투영선이 카메라 위치(눈)라는 하나의 점으로 수렴하기 때문에, 멀리 있는 물체가 작게 투영됩니다." },
+            { q: "뷰 볼륨(View Volume)을 -1에서 1 사이의 정육면체로 변환하는 과정을 무엇이라 하는가?", o: ["Rasterization", "Normalization (정규화)", "Clipping", "Shading"], a: 1, e: "어떤 투영 방식을 쓰든 계산과 클리핑의 편의를 위해 표준 크기인 정육면체로 변환하는 것을 '정규화'라고 합니다." },
+            { q: "원근 투영 행렬 연산의 마지막 단계에서, 동차 좌표계의 w성분(주로 -z)으로 나누는 과정을 무엇이라 하는가?", o: ["Perspective Division", "Normalization", "Viewport Transform", "Rasterization"], a: 0, e: "원근 나눗셈(Perspective Division)을 통해 3D 좌표로 복원되면서 원근 효과(멀수록 작아짐)가 적용됩니다." },
+            { q: "카메라의 위치는 그대로 두고, 바라보는 방향만 회전시키는 카메라 기법은?", o: ["Panning", "Zooming", "Dolly", "Truck"], a: 0, e: "제자리에서 고개만 돌려 주변을 둘러보는 것을 패닝(Panning)이라고 합니다." },
+            { q: "다음 중 뷰포트 변환(Viewport Transformation)의 역할은?", o: ["3D 좌표를 2D 화면 픽셀 좌표로 변환한다.", "물체를 월드 좌표계에 배치한다.", "보이지 않는 면을 제거한다.", "조명 효과를 계산한다."], a: 0, e: "정규화된 좌표(NC)를 실제 모니터 해상도(예: 1920x1080)에 맞는 장치 좌표(DC)로 옮기는 과정입니다." },
+            { q: "UVN 좌표계에서 'n' 축은 무엇을 의미하는가?", o: ["카메라의 위쪽 방향", "카메라의 오른쪽 방향", "카메라가 바라보는 방향 (시선)", "카메라의 위치"], a: 2, e: "n축은 카메라의 시선 방향(Z축)을 나타냅니다. (u: 오른쪽/X축, v: 위쪽/Y축)" },
+            { q: "투영(Projection)의 분류 중, 평행 투영(Parallel)에 속하지 않는 것은?", o: ["Orthographic", "Axonometric", "Oblique", "Perspective"], a: 3, e: "Perspective(원근) 투영은 평행 투영이 아닙니다." }
+        ],
+        ch8: [
+            { q: "은면 제거(Hidden Surface Removal) 알고리즘을 크게 두 가지로 분류할 때, '픽셀 단위'로 처리하는 방식은?", o: ["Object-Space Method", "Image-Space Method", "Vector-Space Method", "World-Space Method"], a: 1, e: "화면의 해상도(픽셀)를 기준으로 가시성을 판단하는 것을 Image-Space 기법이라고 하며, Z-버퍼가 대표적입니다." },
+            { q: "Z-버퍼(Depth Buffer) 알고리즘의 가장 큰 장점은?", o: ["메모리를 거의 사용하지 않는다.", "투명한 물체를 완벽하게 처리한다.", "물체를 정렬(Sorting)할 필요가 없다.", "계산 속도가 가장 느리다."], a: 2, e: "Z-버퍼는 픽셀마다 깊이를 비교하므로, 물체를 그리는 순서(정렬)가 상관없다는 것이 최대 장점입니다." },
+            { q: "후면 제거(Back-Face Culling)에서 면이 보이는지 판단하기 위해 사용하는 조건식은? (N:법선, V:시선)", o: ["N · V > 0", "N · V = 0", "N × V > 0", "N + V = 0"], a: 0, e: "법선과 시선의 내적(Dot Product)이 0보다 커야(각도가 90도 미만) 카메라를 향하고 있다는 뜻이므로 보입니다." },
+            { q: "화가 알고리즘(Painter's Algorithm)의 설명으로 틀린 것은?", o: ["멀리 있는 물체부터 먼저 그린다.", "물체들을 깊이(z) 순서로 정렬해야 한다.", "순환 겹침(Cyclic Overlap) 문제가 발생할 수 있다.", "하드웨어 가속을 받아 Z-버퍼보다 빠르다."], a: 3, e: "정렬 과정이 필요하고 겹침 문제 해결이 복잡하여, 현대 그래픽스에서는 하드웨어 가속을 받는 Z-버퍼가 더 표준으로 쓰입니다." },
+            { q: "물체 공간(Object-Space) 알고리즘의 특징은?", o: ["해상도가 높을수록 느려진다.", "물체의 개수가 많을수록 느려진다.", "계산 결과가 픽셀 단위로 나온다.", "Z-버퍼가 대표적이다."], a: 1, e: "Object-Space는 물체끼리 직접 비교하므로 물체 수가 많아지면 연산량이 급증합니다." },
+            { q: "BSP Tree(Binary Space Partitioning)가 유용한 상황은?", o: ["물체가 계속 움직이는 게임", "카메라는 움직이고 배경(건물 등)은 고정된 게임", "물체가 하나도 없는 상황", "모든 물체가 투명한 상황"], a: 1, e: "BSP 트리는 공간을 미리 분할해 두는 방식이라, 고정된 물체(Static Object)들의 가시성을 빠르게 판단하는 데 유리합니다." },
+            { q: "Ray-Casting 기법에서 가시성을 판단하는 방법은?", o: ["카메라에서 픽셀로 광선을 쏘아 처음 부딪히는 물체를 찾는다.", "물체에서 광선을 쏘아 카메라를 맞춘다.", "모든 물체를 다 그린다.", "가장 멀리 있는 물체를 찾는다."], a: 0, e: "눈(카메라)에서 픽셀을 통과하는 광선(Ray)을 쏘아서 가장 가까운 교차점을 찾습니다." },
+            { q: "Z-버퍼의 초기값은 보통 무엇으로 설정하는가?", o: ["0 (가장 가까움)", "1 (또는 무한대, 가장 멈)", "0.5 (중간)", "-1"], a: 1, e: "처음에는 '아무것도 없는 가장 먼 상태'로 초기화해야, 이후 물체가 그려질 때 더 가까운 값으로 갱신될 수 있습니다." },
+            { q: "두 물체가 서로를 가리는 순환 겹침(Cyclic Overlap) 발생 시 Painter's 알고리즘의 해결책은?", o: ["그리지 않는다.", "아무거나 먼저 그린다.", "물체(폴리곤)를 잘라서(Splitting) 순서를 정한다.", "Z-버퍼를 끈다."], a: 2, e: "A>B>C>A 처럼 꼬인 경우, 한 물체를 잘라서 순서를 명확히 만들어야 합니다." },
+            { q: "투명(Transparency) 처리를 위해 Z-버퍼를 확장한 기법은?", o: ["A-Buffer", "B-Buffer", "C-Buffer", "S-Buffer"], a: 0, e: "A-Buffer(Anti-aliased, Area-averaged, Accumulation Buffer)는 픽셀당 여러 데이터를 리스트로 저장하여 투명도 등을 처리합니다." }
+        ],
+        ch9: [
+            { q: "퐁 조명 모델(Phong Reflection Model)의 3요소가 아닌 것은?", o: ["Ambient (주변광)", "Diffuse (확산광)", "Specular (정반사광)", "Ray Tracing (광선 추적)"], a: 3, e: "기본 3요소는 Ambient, Diffuse, Specular입니다." },
+            { q: "주변광(Ambient Light)의 특징은?", o: ["특정 방향에서 온다.", "방향성이 없으며 전체를 균일하게 밝힌다.", "표면의 거칠기에 영향을 받는다.", "카메라 위치에 따라 달라진다."], a: 1, e: "간접광을 흉내 낸 것으로, 방향 없이 공간 전체에 일정한 밝기를 더해주는 상수값입니다." },
+            { q: "난반사(Diffuse Reflection)의 밝기를 결정하는 법칙은?", o: ["Lambertian Law (람베르트 법칙)", "Snell's Law (스넬의 법칙)", "Newton's Law", "Moore's Law"], a: 0, e: "빛의 입사각과 표면 법선의 내적(cos)에 비례한다는 람베르트 법칙을 따릅니다." },
+            { q: "정반사(Specular) 하이라이트 계산에 관여하는 두 벡터는?", o: ["법선(N)과 광원(L)", "반사광(R)과 시선(V)", "법선(N)과 시선(V)", "광원(L)과 반사광(R)"], a: 1, e: "하이라이트는 빛이 반사된 방향(R)을 우리 눈(V)이 정면으로 볼 때 가장 밝습니다." },
+            { q: "퐁 모델에서 물체의 표면이 매끄러울수록(Shininess, n값이 클수록) 나타나는 현상은?", o: ["하이라이트가 넓고 흐려진다.", "하이라이트가 좁고 선명해진다.", "하이라이트가 사라진다.", "물체가 투명해진다."], a: 1, e: "n이 클수록 정반사 집중도가 높아져, 하이라이트가 작고 날카롭게 맺힙니다 (금속이나 플라스틱 느낌)." },
+            { q: "거리가 멀어질수록 빛의 세기를 줄여주는 처리를 무엇이라 하는가?", o: ["Normalization", "Attenuation (거리 감쇠)", "Rasterization", "Clipping"], a: 1, e: "현실 세계의 물리 법칙($1/d^2$)을 흉내 내어 거리에 따라 빛을 약하게 만드는 것을 감쇠(Attenuation)라고 합니다." },
+            { q: "국소 조명 모델(Local Illumination)과 전역 조명 모델(Global Illumination)의 차이는?", o: ["전역 모델은 다른 물체에서 반사된 간접광까지 계산한다.", "국소 모델이 더 느리다.", "전역 모델은 그림자를 못 만든다.", "차이가 없다."], a: 0, e: "Global Illumination은 빛의 반사, 굴절, 상호작용을 모두 추적하여 훨씬 사실적이지만 계산 비용이 큽니다." },
+            { q: "Diffuse(난반사) 계산 공식의 핵심 항은? (N:법선, L:광원)", o: ["N · L", "N × L", "N + L", "N - L"], a: 0, e: "입사각의 코사인 값인 내적(N · L)이 빛을 받는 양을 결정합니다." },
+            { q: "스포트라이트(Spot Light) 광원의 특징은?", o: ["모든 방향으로 균일하게 빛을 쏜다.", "평행한 빛을 쏜다.", "원뿔(Cone) 형태의 제한된 영역만 비춘다.", "면적이 넓은 광원이다."], a: 2, e: "무대 조명처럼 특정 방향과 각도로 빛을 제한하여 비추는 광원입니다." },
+            { q: "다음 중 자체적으로 빛을 내는 성질을 나타내는 항은?", o: ["Emission", "Ambient", "Diffuse", "Specular"], a: 0, e: "Emission은 물체 자체가 발광하는 색상을 더해주는 항입니다." }
+        ],
+        ch10: [
+            { q: "가장 계산이 빠르지만, 각진 모양(Faceted look)이 그대로 드러나는 셰이딩 기법은?", o: ["Flat Shading", "Gouraud Shading", "Phong Shading", "Ray Tracing"], a: 0, e: "폴리곤 하나당 한 번만 색을 계산하여 전체를 칠하는 플랫 셰이딩입니다." },
+            { q: "Gouraud Shading(고로 셰이딩)의 보간(Interpolation) 대상은 무엇인가?", o: ["법선 벡터 (Normal)", "색상/밝기 (Intensity)", "좌표 (Position)", "텍스처 (Texture)"], a: 1, e: "꼭짓점(Vertex)에서 구한 '색상 값'을 내부 픽셀로 보간합니다." },
+            { q: "Phong Shading(퐁 셰이딩)의 가장 큰 장점은?", o: ["계산이 빠르다.", "하이라이트(Specular)가 정확하고 사실적이다.", "마하 밴드 현상이 심하다.", "폴리곤이 각져 보인다."], a: 1, e: "픽셀마다 법선 벡터를 보간하여 조명을 다시 계산하므로, 하이라이트가 뭉개지지 않고 선명합니다." },
+            { q: "Gouraud Shading의 치명적인 단점은?", o: ["계산이 너무 느리다.", "폴리곤 내부의 하이라이트를 표현하지 못하고 뭉개버린다.", "각져 보인다.", "색상이 너무 밝다."], a: 1, e: "꼭짓점만 계산하므로, 폴리곤 중앙에 맺혀야 할 빛 반사를 놓치는 경우가 많습니다." },
+            { q: "Flat Shading에서 인접한 면의 밝기 차이가 과장되어 경계선이 띠처럼 보이는 착시 현상은?", o: ["Mach Band Effect (마하 밴드)", "Doppler Effect", "Aliasing", "Moiré Pattern"], a: 0, e: "우리 눈이 경계면의 명암 대비를 과장해서 인식하는 현상을 마하 밴드 효과라고 합니다." },
+            { q: "안티앨리어싱(Anti-Aliasing)의 원리는?", o: ["경계선을 더 진하게 그린다.", "경계 픽셀의 색상을 배경과 혼합(Blending)하여 부드럽게 한다.", "해상도를 낮춘다.", "물체를 흐리게 만든다."], a: 1, e: "계단 현상을 없애기 위해 경계 부분에 중간색을 채워 시각적으로 부드럽게 만듭니다." },
+            { q: "화면을 고해상도로 렌더링한 후 축소하여 안티앨리어싱 효과를 내는 기법은?", o: ["Super-sampling (Post-filtering)", "Area-sampling", "Z-buffering", "Texture Mapping"], a: 0, e: "크게 그려서 평균을 내는(축소하는) 방식이 슈퍼샘플링입니다." },
+            { q: "Scan-Line 알고리즘에서 인접한 픽셀의 계산 결과를 재활용하여 속도를 높이는 원리는?", o: ["Spatial Coherence (공간적 응집성)", "Temporal Coherence", "Random Access", "Ray Tracing"], a: 0, e: "옆 픽셀은 나랑 비슷하다는 성질을 이용해 연산량을 줄입니다." },
+            { q: "다음 중 계산량이 가장 많은(느린) 셰이딩 기법은?", o: ["Flat", "Gouraud", "Phong", "모두 같다"], a: 2, e: "Phong 셰이딩은 픽셀 수만큼 조명 공식을 돌려야 하므로 가장 무겁습니다." },
+            { q: "폴리곤 셰이딩이 일어나는 렌더링 파이프라인 단계는?", o: ["Modeling", "Projection", "Scan Conversion (Rasterization)", "Viewing"], a: 2, e: "화면의 픽셀을 채우는 단계인 스캔 변환(래스터화) 단계에서 셰이딩이 수행됩니다." }
+        ]
+    };
 
-    let currentQuestionIndex = 0;
-    const userAnswers = new Array(quizData.length).fill(null); // 사용자가 선택한 답 저장
+    let currentQuiz = [];
+    let currentIndex = 0;
+    let score = 0;
+
+    // 퀴즈 시작 함수
+    function startQuiz(type) {
+        document.getElementById('intro-msg').style.display = 'none';
+        document.getElementById('quiz-box').classList.add('active');
+        
+        // 버튼 활성화 스타일
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // 문제 로드
+        if (type === 'all') {
+            // 전체 문제에서 랜덤 20개 추출
+            const allQuestions = [...db.ch7, ...db.ch8, ...db.ch9, ...db.ch10];
+            currentQuiz = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 20);
+            document.getElementById('chapter-badge').innerText = "종합 모의고사";
+        } else {
+            currentQuiz = [...db[type]]; // 복사해서 사용
+            const titles = {ch7:"Chapter 7", ch8:"Chapter 8", ch9:"Chapter 9", ch10:"Chapter 10"};
+            document.getElementById('chapter-badge').innerText = titles[type];
+        }
+
+        currentIndex = 0;
+        score = 0;
+        renderQuestion();
+    }
 
     function renderQuestion() {
-        const questionData = quizData[currentQuestionIndex];
+        const qData = currentQuiz[currentIndex];
         
-        // 진행상황 업데이트
-        document.getElementById('progress').innerText = `문제 ${currentQuestionIndex + 1} / ${quizData.length}`;
+        // UI 업데이트
+        document.getElementById('q-number').innerText = `${currentIndex + 1} / ${currentQuiz.length}`;
+        document.getElementById('q-text').innerText = qData.q;
         
-        // 문제 텍스트
-        document.getElementById('question-text').innerText = questionData.question;
-        
+        // 프로그레스 바
+        const progress = ((currentIndex) / currentQuiz.length) * 100;
+        document.getElementById('progress-fill').style.width = `${progress}%`;
+
         // 보기 초기화
-        const optionsContainer = document.getElementById('options-container');
-        optionsContainer.innerHTML = '';
+        const optionsBox = document.getElementById('options-box');
+        optionsBox.innerHTML = '';
         
         // 해설 숨기기
-        const explanationDiv = document.getElementById('explanation');
-        explanationDiv.style.display = 'none';
-        explanationDiv.innerHTML = '';
+        const explanationBox = document.getElementById('explanation-box');
+        explanationBox.style.display = 'none';
+        explanationBox.innerHTML = '';
 
         // 보기 버튼 생성
-        questionData.options.forEach((option, index) => {
+        qData.o.forEach((opt, idx) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
-            btn.innerText = option;
-            btn.onclick = () => checkAnswer(index);
-            optionsContainer.appendChild(btn);
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(btn, idx);
+            optionsBox.appendChild(btn);
         });
 
-        // 이미 푼 문제라면 상태 복원
-        if (userAnswers[currentQuestionIndex] !== null) {
-            showResult(userAnswers[currentQuestionIndex]);
+        // 이미 푼 문제라면 복원
+        if (qData.userSelect !== undefined) {
+            checkAnswer(optionsBox.children[qData.userSelect], qData.userSelect, true);
         }
 
-        // 버튼 활성/비활성 상태 업데이트
-        document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
-        document.getElementById('next-btn').innerText = (currentQuestionIndex === quizData.length - 1) ? '종료' : '다음';
+        // 네비게이션 버튼 상태
+        document.getElementById('prev-btn').disabled = (currentIndex === 0);
+        document.getElementById('next-btn').innerText = (currentIndex === currentQuiz.length - 1) ? '결과 보기' : '다음';
     }
 
-    function checkAnswer(selectedIndex) {
-        if (userAnswers[currentQuestionIndex] !== null) return; // 이미 풀었으면 중복 클릭 방지
+    function checkAnswer(btn, selectedIdx, isReplay = false) {
+        const qData = currentQuiz[currentIndex];
+        
+        if (qData.userSelect !== undefined && !isReplay) return; // 이미 풀었으면 패스
 
-        userAnswers[currentQuestionIndex] = selectedIndex;
-        showResult(selectedIndex);
-    }
+        // 정답 기록
+        if (!isReplay) {
+            qData.userSelect = selectedIdx;
+            if (selectedIdx === qData.a) score++;
+        }
 
-    function showResult(selectedIndex) {
-        const questionData = quizData[currentQuestionIndex];
-        const buttons = document.getElementsByClassName('option-btn');
-        const explanationDiv = document.getElementById('explanation');
-
-        // 정답/오답 스타일 적용
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].disabled = true; // 모든 버튼 비활성화
-            if (i === questionData.answer) {
-                buttons[i].classList.add('correct');
-                buttons[i].innerHTML += " (정답 ⭕)";
-            }
-            if (i === selectedIndex && i !== questionData.answer) {
-                buttons[i].classList.add('incorrect');
-                buttons[i].innerHTML += " (오답 ❌)";
+        // 스타일 적용
+        const opts = document.getElementById('options-box').children;
+        for (let i = 0; i < opts.length; i++) {
+            opts[i].disabled = true;
+            if (i === qData.a) {
+                opts[i].classList.add('correct');
+                opts[i].innerHTML += " ✅";
+            } else if (i === selectedIdx && i !== qData.a) {
+                opts[i].classList.add('incorrect');
+                opts[i].innerHTML += " ❌";
             }
         }
 
         // 해설 표시
-        explanationDiv.innerHTML = questionData.explanation;
-        explanationDiv.style.display = 'block';
-    }
+        const expBox = document.getElementById('explanation-box');
+        expBox.innerHTML = `<strong>💡 해설:</strong><br>${qData.e}`;
+        expBox.style.display = 'block';
 
-    function changeQuestion(direction) {
-        const newIndex = currentQuestionIndex + direction;
-        if (newIndex >= 0 && newIndex < quizData.length) {
-            currentQuestionIndex = newIndex;
-            renderQuestion();
-        } else if (newIndex === quizData.length) {
-            alert("모든 문제를 풀었습니다! 수고하셨습니다.");
+        // 프로그레스 바 꽉 채우기 (마지막 문제일 때)
+        if (currentIndex === currentQuiz.length - 1) {
+             document.getElementById('progress-fill').style.width = `100%`;
         }
     }
 
-    // 초기 실행
-    renderQuestion();
+    function changeQuestion(dir) {
+        const nextIndex = currentIndex + dir;
+
+        if (nextIndex >= currentQuiz.length) {
+            // 결과 화면
+            alert(`수고하셨습니다!\n총 ${currentQuiz.length}문제 중 ${score}개를 맞추셨습니다.\n점수: ${Math.round((score/currentQuiz.length)*100)}점`);
+            return;
+        }
+
+        currentIndex = nextIndex;
+        renderQuestion();
+    }
 
 </script>
 
