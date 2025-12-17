@@ -3,706 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG 기말고사 완전정복 문제은행</title>
+    <title>컴퓨터 그래픽스 기말 대비 문제은행</title>
     <style>
-        :root {
-            --primary-color: #4a90e2;
-            --success-color: #28a745;
-            --error-color: #dc3545;
-            --bg-color: #f8f9fa;
-        }
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .header { text-align: center; margin-bottom: 30px; }
-        .menu-container {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        .menu-btn {
-            padding: 12px 24px;
-            border: 2px solid var(--primary-color);
-            background: white;
-            color: var(--primary-color);
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-        .menu-btn:hover, .menu-btn.active {
-            background: var(--primary-color);
-            color: white;
-        }
-        .quiz-card {
-            background: white;
-            width: 100%;
-            max-width: 800px;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            display: none;
-        }
+        :root { --blue: #4a90e2; --green: #2ecc71; --red: #e74c3c; --text: #2c3e50; }
+        body { font-family: 'Pretendard', sans-serif; background: #f5f6fa; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; color: var(--text); }
+        .menu { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+        .btn { padding: 12px 20px; border: 2px solid var(--blue); background: white; color: var(--blue); border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn:hover, .btn.active { background: var(--blue); color: white; }
+        .quiz-card { background: white; width: 100%; max-width: 800px; border-radius: 15px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; }
         .quiz-card.active { display: block; }
-        .progress-container { margin-bottom: 20px; }
-        .progress-text { font-size: 0.9rem; color: #666; margin-bottom: 5px; display: flex; justify-content: space-between; }
-        .progress-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--primary-color); width: 0%; transition: 0.3s; }
-        .question-text { font-size: 1.4rem; font-weight: 700; color: #2d3436; margin-bottom: 30px; line-height: 1.4; }
-        .options-list { display: grid; gap: 15px; }
-        .option-item {
-            padding: 18px;
-            border: 2px solid #e1e4e8;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            background: #fff;
-            font-size: 1.05rem;
-            line-height: 1.4;
-        }
-        .option-item:hover:not(.disabled) { border-color: var(--primary-color); background: #f1f7ff; }
-        .option-item.correct { border-color: var(--success-color); background: #e9f7ef; color: #155724; font-weight: 600; }
-        .option-item.incorrect { border-color: var(--error-color); background: #fdeaea; color: #721c24; }
-        .option-item.disabled { cursor: default; }
-        .explanation-box {
-            margin-top: 30px;
-            padding: 25px;
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            border-left: 6px solid var(--primary-color);
-            border-radius: 8px;
-            display: none;
-        }
-        .exp-title { font-weight: 800; color: var(--primary-color); margin-bottom: 10px; display: block; }
-        .nav-controls { display: flex; justify-content: space-between; margin-top: 40px; }
-        .nav-btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            background: var(--primary-color);
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .nav-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .progress-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: #7f8c8d; }
+        .progress-bar { height: 6px; background: #eee; border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--blue); width: 0%; transition: 0.3s; }
+        .question { font-size: 1.3rem; font-weight: bold; margin-bottom: 25px; line-height: 1.5; }
+        .options { display: grid; gap: 12px; }
+        .option { padding: 15px; border: 2px solid #edeff2; border-radius: 10px; cursor: pointer; transition: 0.2s; background: #fff; }
+        .option:hover { border-color: var(--blue); background: #f0f7ff; }
+        .option.correct { border-color: var(--green); background: #eafaf1; color: #27ae60; font-weight: bold; }
+        .option.incorrect { border-color: var(--red); background: #fdedec; color: #c0392b; }
+        .option.disabled { cursor: default; pointer-events: none; }
+        .explanation { margin-top: 25px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 5px solid var(--blue); display: none; line-height: 1.6; }
+        .nav { display: flex; justify-content: space-between; margin-top: 30px; }
+        .nav-btn { padding: 10px 25px; border: none; border-radius: 5px; background: var(--blue); color: white; cursor: pointer; font-weight: bold; }
+        .nav-btn:disabled { background: #bdc3c7; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>🎓 CG 기말고사 집중 트레이닝</h1>
-    <p>각 챕터별 20문제, 상세 해설 포함</p>
-</div>
+    <h1>📝 CG 기말고사 완전정복 (80문항)</h1>
+    <div class="menu">
+        <button class="btn" onclick="initQuiz('ch7')">7장: 3D Viewing</button>
+        <button class="btn" onclick="initQuiz('ch8')">8장: 은면 제거</button>
+        <button class="btn" onclick="initQuiz('ch9')">9장: 조명 모델</button>
+        <button class="btn" onclick="initQuiz('ch10')">10장: 셰이딩</button>
+        <button class="btn" onclick="initQuiz('all')">🏆 종합 모의고사 (20문항)</button>
+    </div>
 
-<div class="menu-container" id="main-menu">
-    <button class="menu-btn" onclick="initQuiz('ch7')">7장: 3D Viewing</button>
-    <button class="menu-btn" onclick="initQuiz('ch8')">8장: 은면 제거</button>
-    <button class="menu-btn" onclick="initQuiz('ch9')">9장: 조명 모델</button>
-    <button class="menu-btn" onclick="initQuiz('ch10')">10장: 셰이딩</button>
-    <button class="menu-btn" onclick="initQuiz('all')">🔥 전체 종합 (20문항)</button>
-</div>
-
-<div class="quiz-card" id="quiz-card">
-    <div class="progress-container">
-        <div class="progress-text">
-            <span id="chap-label">Chapter</span>
-            <span id="idx-label">1 / 20</span>
+    <div class="quiz-card" id="card">
+        <div class="progress-info">
+            <span id="chap-name">Chapter</span>
+            <span id="q-idx">1 / 20</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
+        <div class="question" id="q-text">문제가 로드되지 않았습니다. 상단 버튼을 눌러주세요.</div>
+        <div class="options" id="opt-list"></div>
+        <div class="explanation" id="exp-box"></div>
+        <div class="nav">
+            <button class="nav-btn" id="p-btn" onclick="move(-1)">이전</button>
+            <button class="nav-btn" id="n-btn" onclick="move(1)">다음</button>
+        </div>
     </div>
-    <div class="question-text" id="q-text"></div>
-    <div class="options-list" id="options-list"></div>
-    <div class="explanation-box" id="exp-box"></div>
-    <div class="nav-controls">
-        <button class="nav-btn" id="prev-btn" onclick="move(-1)">이전</button>
-        <button class="nav-btn" id="next-btn" onclick="move(1)">다음</button>
-    </div>
-</div>
 
 <script>
 const db = {
     ch7: [
-        {
-            q: "3D 뷰잉 파이프라인에서 정규화 장치 좌표(NDC)로 변환하는 주된 이유는 무엇인가?",
-            o: ["물체에 조명을 적용하기 위해서", "장치 독립적인 클리핑(Clipping) 처리를 위해서", "물체의 가려진 부분을 제거하기 위해서", "물체의 실제 크기를 보존하기 위해서"],
-            a: 1,
-            e: "<b>해설:</b> 모니터마다 해상도와 크기가 다르기 때문에, 이를 일일이 고려하여 화면 밖 물체를 자르는(Clipping) 것은 비효율적입니다. 따라서 모든 뷰 볼륨을 <b>-1에서 1 사이의 표준 정육면체</b>로 변환(정규화)하면, 어떤 시스템에서든 동일한 알고리즘으로 효율적인 클리핑이 가능해집니다."
-        },
-        {
-            q: "카메라 좌표계(UVN)에서 v축(View-Up)을 구하는 수식으로 옳은 것은?",
-            o: ["n × u", "u × n", "V_up × n", "n × V_up"],
-            a: 0,
-            e: "<b>해설:</b> 오른손 좌표계 기준 외적(Cross Product)의 순서가 중요합니다. n축(시선)과 u축(오른쪽)이 결정된 후, n과 u를 외적(n × u)해야 카메라의 위쪽 방향인 v축이 수직하게 산출됩니다. (u × n은 아래 방향 벡터가 됨)"
-        },
-        {
-            q: "원근 투영(Perspective Projection)에서 시야각(FOV)이 좁아질 때 나타나는 현상은?",
-            o: ["물체가 멀리 있는 것처럼 보인다.", "물체가 확대되어 보이는 망원(Zoom-in) 효과가 나타난다.", "화면의 왜곡이 심해진다.", "물체가 투명해진다."],
-            a: 1,
-            e: "<b>해설:</b> 시야각(Field of View)은 카메라 렌즈의 화각과 같습니다. 각도가 좁아지면 보이는 범위는 좁아지는 대신 특정 물체가 화면에 크게 맺히게 되므로, 줌 렌즈로 당겨 찍는 것과 같은 <b>망원 효과</b>가 발생합니다."
-        },
-        {
-            q: "직교 투영(Orthographic Projection) 행렬에서 z축 성분이 음수(-)로 변환되는 주된 이유는?",
-            o: ["원근감을 만들기 위해서", "오른손 좌표계를 왼손 좌표계로 변환하기 위해서", "물체를 회전시키기 위해서", "색상 값을 정규화하기 위해서"],
-            a: 1,
-            e: "<b>해설:</b> OpenGL 같은 시스템은 기본적으로 오른손 좌표계(카메라가 -z를 봄)를 사용하지만, 정규화 과정에서는 계산의 편의를 위해 앞쪽이 양수가 되는 왼손 좌표계 형태로 변환하는 경우가 많습니다. 이때 방향을 뒤집기 위해 z축에 마이너스 부호가 적용됩니다."
-        },
-        {
-            q: "3D 뷰잉 단계 중 'Clipping'이 수행되는 시점은 언제인가?",
-            o: ["월드 좌표계 변환 직후", "투영 변환 이후 정규화 좌표계에서", "조명 계산 단계에서", "화면 출력 직후"],
-            a: 1,
-            e: "<b>해설:</b> 클리핑은 화면에 보이지 않는 부분을 잘라내는 작업입니다. 가장 효율적인 시점은 모든 뷰 볼륨이 -1~1 사이의 정육면체 박스로 고정된 <b>정규화 좌표계(NDC)</b> 단계입니다. 이때는 좌표가 1보다 큰지 -1보다 작은지만 체크하면 되기 때문입니다."
-        },
-        {
-            q: "원근 투영의 뷰 볼륨인 절두체(Frustum)를 정의할 때 필요하지 않은 값은?",
-            o: ["Field of View (FOV)", "Aspect Ratio (종횡비)", "Near/Far Plane Distance", "Light Source Position"],
-            a: 3,
-            e: "<b>해설:</b> 절두체는 카메라의 시야 범위를 정의하는 것이므로, 화각(FOV), 화면 가로세로 비율(Aspect), 어디서부터 어디까지 볼지(Near/Far)의 정보가 필요합니다. 광원의 위치는 조명(Lighting) 단계에서 필요하며 뷰 볼륨 정의와는 무관합니다."
-        },
-        {
-            q: "동차 좌표계(Homogeneous Coordinates)에서 [x, y, z, w]의 w값이 0일 때의 의미는?",
-            o: ["원점에 위치한 점", "무한히 멀리 있는 방향(벡터)", "존재하지 않는 좌표", "화면 중앙의 픽셀"],
-            a: 1,
-            e: "<b>해설:</b> w가 1이면 특정한 위치(점)를 나타내지만, w가 0이면 위치가 없는 <b>방향(벡터)</b>을 의미하게 됩니다. 이는 무한히 멀리 있는 점으로 해석되어 태양광 같은 평행 광원을 표현할 때 유용하게 쓰입니다."
-        },
-        {
-            q: "Viewport Transformation의 역할로 옳은 것은?",
-            o: ["물체의 가려짐을 판단한다.", "정규화된 좌표를 실제 윈도우 픽셀 좌표로 매핑한다.", "3D 공간을 2D로 투영한다.", "물체 표면의 색을 결정한다."],
-            a: 1,
-            e: "<b>해설:</b> NDC 좌표계(-1~1)는 추상적인 숫자입니다. 이를 실제 사용자의 모니터 해상도(예: 800x600)의 실제 픽셀 위치로 비례에 맞춰 환산해주는 단계를 뷰포트 변환이라고 합니다."
-        },
-        {
-            q: "3D 공간에서 카메라를 특정 축을 중심으로 회전시키는 변환 행렬의 특징은?",
-            o: ["행렬식(Determinant)이 0이다.", "역행렬이 전치행렬(Transpose)과 같은 직교 행렬이다.", "대각 성분이 모두 0이다.", "행렬의 모든 합이 1이다."],
-            a: 1,
-            e: "<b>해설:</b> 순수 회전 행렬(Rotation Matrix)은 <b>직교 행렬(Orthogonal Matrix)</b>이라는 특성을 가집니다. 이 때문에 역행렬을 복잡하게 구할 필요 없이 행과 열만 바꾼 전치행렬을 취하면 바로 역행렬이 되어 계산 효율이 매우 좋습니다."
-        },
-        {
-            q: "원근 투영에서 '소실점(Vanishing Point)'이 생기는 수학적 이유는?",
-            o: ["빛의 회절 현상 때문에", "좌표를 깊이(z) 값으로 나누기 때문에", "카메라 렌즈의 굴절 때문에", "물체의 반사율 때문에"],
-            a: 1,
-            e: "<b>해설:</b> 원근 투영 변환 후 수행되는 <b>Perspective Division</b> 단계에서 x, y 좌표를 z(깊이)로 나눕니다. z가 커질수록(멀어질수록) x, y 값은 0에 가까워지게 되며, 이것이 시각적으로 평행한 선들이 한 점(0,0)으로 모이는 소실점 현상을 만듭니다."
-        },
-        {
-            q: "다음 중 뷰 평면(View Plane)에 대한 설명으로 옳은 것은?",
-            o: ["항상 월드 좌표계의 z=0 평면이다.", "카메라 시선 방향에 수직인 2D 투영면이다.", "물체의 뒷면을 의미한다.", "광원의 위치를 나타내는 평면이다."],
-            a: 1,
-            e: "<b>해설:</b> 뷰 평면은 카메라 렌즈 앞에 놓인 필름이나 이미지 센서라고 생각하면 됩니다. 카메라 좌표계의 n축(시선)에 수직으로 위치하여 3D 물체가 2D 이미지로 맺히는 가상의 평면입니다."
-        },
-        {
-            q: "Look-at 함수를 통해 뷰 변환 행렬을 생성할 때, 내부적으로 수행되는 두 연산은?",
-            o: ["이동(Translation)과 회전(Rotation)", "이동(Translation)과 크기 조절(Scaling)", "회전(Rotation)과 전단(Shearing)", "투영(Projection)과 클리핑(Clipping)"],
-            a: 0,
-            e: "<b>해설:</b> 카메라를 원하는 위치에 놓고 원하는 곳을 보게 만들려면, 먼저 카메라 위치($P_0$)를 원점으로 옮기는 <b>이동</b>을 수행한 뒤, 카메라의 축(uvn)을 월드 축(xyz)과 일치시키는 <b>회전</b> 연산을 수행해야 합니다."
-        },
-        {
-            q: "Aspect Ratio(종횡비)가 2.0일 때 뷰 윈도우의 가로 세로 비율은?",
-            o: ["가로가 세로의 0.5배", "가로가 세로의 2배", "가로와 세로가 같다", "세로가 가로의 2배"],
-            a: 1,
-            e: "<b>해설:</b> 종횡비(Aspect Ratio)는 <b>가로(Width) / 세로(Height)</b>의 비율입니다. 따라서 2.0이라면 가로 길이가 세로 길이보다 2배 더 길다는 것을 의미합니다."
-        },
-        {
-            q: "평행 투영 중 'Cavalier Projection'의 특징은?",
-            o: ["투영각이 90도이다.", "수평선과 45도 각도를 이루며 실제 길이를 유지한다.", "길이가 0.5배로 축소된다.", "원근감이 매우 강하다."],
-            a: 1,
-            e: "<b>해설:</b> Oblique(경사) 투영의 한 종류인 Cavalier 투영은 투영선이 지면과 45도를 이루며, 깊이 방향의 길이를 축소하지 않고 실제 길이 그대로 표현하는 것이 특징입니다."
-        },
-        {
-            q: "원근 투영 행렬의 [3][2] 성분이 -1인 이유는 무엇인가?",
-            o: ["z값을 w성분으로 복사하기 위해", "물체를 뒤집기 위해", "화면을 어둡게 하기 위해", "조명을 반사시키기 위해"],
-            a: 0,
-            e: "<b>해설:</b> 행렬 곱셈 결과에서 $w$ 성분에 $z$ 값을 저장하기 위해서입니다. 그래야 나중에 좌표를 $w$로 나눌 때 사실상 $z$로 나누는 효과(원근 효과)를 낼 수 있기 때문입니다."
-        },
-        {
-            q: "Dolly-in 효과와 Zoom-in 효과의 차이점은?",
-            o: ["차이가 없다.", "Dolly는 카메라 자체가 이동하고, Zoom은 렌즈 화각(FOV)을 조절한다.", "Dolly는 회전이고, Zoom은 이동이다.", "Dolly는 어둡게 하고, Zoom은 밝게 한다."],
-            a: 1,
-            e: "<b>해설:</b> 돌리(Dolly)는 카메라를 실은 수레를 직접 물체 쪽으로 밀고 들어가는 <b>이동</b>이고, 줌(Zoom)은 제자리에서 렌즈의 초점 거리를 바꿔 <b>시야각(FOV)</b>을 좁히는 것입니다. 시각적으로 물체가 커지는 것은 비슷하지만 배경의 왜곡 느낌이 다릅니다."
-        },
-        {
-            q: "카메라 좌표계 u, v, n 벡터 중 월드 좌표계의 '오른쪽' 방향에 대응하는 것은?",
-            o: ["u", "v", "n", "V_up"],
-            a: 0,
-            e: "<b>해설:</b> 카메라 좌표계에서 u는 가로(X축/오른쪽), v는 세로(Y축/위쪽), n은 깊이(Z축/시선방향)를 담당합니다."
-        },
-        {
-            q: "Axonometric 투영 중 세 축의 각도가 모두 동일한 투영법은?",
-            o: ["Isometric (등각 투영)", "Dimetric", "Trimetric", "Oblique"],
-            a: 0,
-            e: "<b>해설:</b> 'Iso'는 같다는 의미입니다. Isometric 투영은 물체의 세 주축이 투영면과 이루는 각도가 모두 같아(120도 간격), 모든 방향의 축소 비율이 동일한 투영법입니다."
-        },
-        {
-            q: "3D 뷰잉 단계 중 'Scan Conversion' 직전에 수행되는 단계는?",
-            o: ["Modeling Transform", "Lighting", "Viewport Transform", "Viewing Transform"],
-            a: 2,
-            e: "<b>해설:</b> 렌더링 파이프라인의 마지막 변환은 실제 픽셀 좌표로 바꾸는 <b>Viewport Transform</b>이며, 그 결과값(픽셀 좌표)을 가지고 실제로 화면의 점을 찍는 <b>Scan Conversion</b>이 시작됩니다."
-        },
-        {
-            q: "Window-to-Viewport 변환에서 물체의 모양이 일그러지지 않게 하려면?",
-            o: ["윈도우와 뷰포트의 가로세로비(Aspect Ratio)를 일치시킨다.", "항상 정육면체로 만든다.", "크기를 2배로 늘린다.", "조명을 더 밝게 한다."],
-            a: 0,
-            e: "<b>해설:</b> 윈도우(논리적 창)와 뷰포트(실제 출력 창)의 가로/세로 비율이 다르면 물체가 옆으로 퍼지거나 위로 길쭉해지는 왜곡이 발생합니다. 이를 방지하려면 두 영역의 비율을 동일하게 유지해야 합니다."
-        }
+        { q: "3D Viewing Pipeline에서 MC를 WC로 옮긴 후 다음 단계는?", o: ["PC (Projection)", "VC (Viewing)", "NC (Normalized)", "DC (Device)"], a: 1, e: "<b>해설:</b> 월드 좌표계(WC)에 물체를 배치한 뒤에는 카메라의 위치와 방향을 기준으로 하는 <b>카메라/뷰잉 좌표계(VC)</b>로 모든 물체를 옮겨야 합니다." },
+        { q: "원근 투영에서 시야각(FOV)이 커지면 나타나는 현상은?", o: ["물체가 커진다", "보이는 범위가 넓어지고 물체는 작아진다 (광각)", "원근감이 사라진다", "화면이 밝아진다"], a: 1, e: "<b>해설:</b> FOV(Field of View)가 커지면 더 넓은 세상을 한 화면에 담기 때문에 각 물체는 상대적으로 작게 투영됩니다. (광각 렌즈 효과)" },
+        { q: "UVN 좌표계에서 카메라의 오른쪽 방향을 나타내는 벡터는?", o: ["u", "v", "n", "Up"], a: 0, e: "<b>해설:</b> u는 가로(X), v는 세로(Y), n은 시선 깊이(Z)에 대응합니다." },
+        { q: "직교 투영의 뷰 볼륨 형태는?", o: ["원뿔", "절두체(Frustum)", "직육면체(Rectangular Box)", "구형"], a: 2, e: "<b>해설:</b> 직교 투영은 모든 투영선이 평행하므로 박스 형태의 뷰 볼륨을 가집니다." },
+        { q: "정규화 장치 좌표(NDC)의 범위는 보통 얼마인가?", o: ["0 to 1", "-1 to 1", "-255 to 255", "무한대"], a: 1, e: "<b>해설:</b> 효율적인 클리핑을 위해 모든 공간을 -1.0에서 1.0 사이의 정육면체로 통일합니다." },
+        { q: "원근 투영에서 발생하는 '왜곡' 중 거리에 따른 크기 변화를 무엇이라 하는가?", o: ["Aliasing", "Foreshortening", "Shading", "Clipping"], a: 1, e: "<b>해설:</b> 멀리 있는 물체가 작게 보이는 현상을 원근 단축(Foreshortening)이라고 합니다." },
+        { q: "Viewport 변환의 역할은?", o: ["3D 투영", "정규화 좌표를 실제 픽셀 좌표로 변환", "조명 계산", "그림자 생성"], a: 1, e: "<b>해설:</b> 가상의 -1~1 좌표를 실제 모니터 해상도(픽셀)로 변환하는 최종 단계입니다." },
+        { q: "Look-at 함수가 생성하는 행렬은?", o: ["Modeling Matrix", "Viewing Matrix", "Projection Matrix", "Viewport Matrix"], a: 1, e: "<b>해설:</b> 카메라의 위치와 타겟을 설정하여 뷰 변환 행렬을 만듭니다." },
+        { q: "원근 투영에서 모든 투영선이 모이는 점의 명칭은?", o: ["Vanishing Point", "Center of Projection (COP)", "Origin", "Normal Point"], a: 1, e: "<b>해설:</b> 모든 빛의 경로가 모이는 카메라 렌즈의 중심 혹은 눈의 위치를 COP라고 합니다." },
+        { q: "Clipping이 가장 효율적으로 수행되는 좌표계는?", o: ["월드 좌표", "카메라 좌표", "정규화 좌표(NDC)", "스크린 좌표"], a: 2, e: "<b>해설:</b> -1과 1 사이인지 0과 1 사이인지 숫자만 비교하면 되는 NDC 단계가 가장 빠릅니다." },
+        { q: "Perspective Division은 어떤 값으로 나누는 과정인가?", o: ["x", "y", "z", "w (또는 -z)"], a: 3, e: "<b>해설:</b> 동차 좌표계의 w값으로 나눔으로써 원근 효과가 수학적으로 완성됩니다." },
+        { q: "평행 투영 중 축의 비율이 모두 같은 투영법은?", o: ["Isometric", "Oblique", "Perspective", "Cavalier"], a: 0, e: "<b>해설:</b> 등각(Isometric) 투영은 세 주축의 축소 비율이 모두 동일합니다." },
+        { q: "카메라가 제자리에서 위아래로 움직이는 회전을 무엇이라 하는가?", o: ["Panning", "Tilting", "Rolling", "Dolly"], a: 1, e: "<b>해설:</b> 좌우 회전은 Panning, 위아래 회전은 Tilting입니다." },
+        { q: "Aspect Ratio의 공식은?", o: ["Height / Width", "Width / Height", "Width + Height", "Z / W"], a: 1, e: "<b>해설:</b> 가로 길이를 세로 길이로 나눈 비율입니다." },
+        { q: "원근 투영에서 '소실점'은 평행한 선들이 어디서 만나는 것처럼 보이는 점인가?", o: ["원점", "무한대", "카메라 위치", "Near Plane"], a: 1, e: "<b>해설:</b> 무한히 멀어질 때 좌표가 한 점으로 수렴하는 곳입니다." },
+        { q: "오른손 좌표계에서 카메라가 바라보는 기본 방향은?", o: ["+X", "+Y", "+Z", "-Z"], a: 3, e: "<b>해설:</b> OpenGL 등 오른손 좌표계 표준에서는 카메라가 -Z 방향을 바라봅니다." },
+        { q: "View-Up 벡터가 시선 벡터와 평행하면 발생하는 문제는?", o: ["화면이 밝아짐", "카메라 좌표계를 정의할 수 없음 (외적 불가)", "물체가 커짐", "투명해짐"], a: 1, e: "<b>해설:</b> 두 벡터가 평행하면 외적($\times$)을 통해 새로운 축(U)을 구할 수 없습니다." },
+        { q: "Window-to-Viewport 변환 시 가로세로비가 다르면 생기는 현상은?", o: ["색상 왜곡", "물체 모양의 일그러짐 (Distortion)", "그림자 소실", "계단 현상"], a: 1, e: "<b>해설:</b> 비율이 안 맞으면 물체가 홀쭉하거나 뚱뚱하게 보입니다." },
+        { q: "투영 행렬에서 Near 평면의 역할은?", o: ["가장 먼 경계", "가장 가까운 경계 (이보다 가까우면 잘림)", "빛의 세기", "해상도"], a: 1, e: "<b>해설:</b> 카메라와 너무 가까운 물체가 화면을 가리는 것을 막는 절단면입니다." },
+        { q: "3D 뷰잉의 마지막 단계는?", o: ["조명", "뷰포트 변환", "모델 변환", "투영"], a: 1, e: "<b>해설:</b> 픽셀 좌표로 바꾸는 뷰포트 변환이 기하 변환의 마지막입니다." }
     ],
     ch8: [
-        {
-            q: "Z-Buffer 알고리즘에서 새로운 픽셀을 그리기 위한 조건은? (z_new: 현재 픽셀 깊이, z_buffer: 저장된 깊이)",
-            o: ["z_new > z_buffer", "z_new < z_buffer", "z_new == z_buffer", "항상 그린다"],
-            a: 1,
-            e: "<b>해설:</b> 깊이 값(z)이 작을수록 카메라와 가깝다는 의미입니다. 새로 그리려는 픽셀의 깊이가 버퍼에 저장된 값보다 <b>작아야(더 가까워야)</b> 현재 물체가 앞에 있는 것이므로, 색상을 갱신하고 버퍼 값도 새로운 z값으로 바꿉니다."
-        },
-        {
-            q: "Back-Face Culling의 주된 목적은 무엇인가?",
-            o: ["그림자를 만들기 위해서", "보이지 않는 뒷면 연산을 생략하여 성능을 높이기 위해서", "물체를 더 밝게 하기 위해서", "물체의 투명도를 조절하기 위해서"],
-            a: 1,
-            e: "<b>해설:</b> 닫힌 입체(Closed Volume)에서 뒷면은 절대 보이지 않습니다. 래스터화 단계 이전에 이를 미리 제거하면 조명 계산이나 픽셀 채우기 연산을 약 50% 정도 줄일 수 있어 렌더링 속도가 크게 향상됩니다."
-        },
-        {
-            q: "Painter's Algorithm에서 물체를 깊이 순서로 정렬할 때 기준이 되는 좌표계는?",
-            o: ["모델 좌표계", "월드 좌표계", "뷰잉(카메라) 좌표계", "픽셀 좌표계"],
-            a: 2,
-            e: "<b>해설:</b> 무엇이 앞에 있고 뒤에 있는지는 '카메라(관찰자)'가 어디 있느냐에 따라 결정됩니다. 따라서 카메라를 원점으로 하는 <b>뷰잉 좌표계</b>의 z값(깊이)을 기준으로 정렬해야 합니다."
-        },
-        {
-            q: "Z-Buffer의 단점으로 틀린 것은?",
-            o: ["깊이 저장을 위한 추가 메모리가 필요하다.", "정렬(Sorting) 시간이 너무 오래 걸린다.", "투명한 물체 처리가 기본적으로 어렵다.", "정밀도가 낮을 경우 지-파이팅(Z-fighting)이 발생한다."],
-            a: 1,
-            e: "<b>해설:</b> Z-버퍼의 최대 장점은 <b>정렬이 필요 없다</b>는 것입니다. 단점으로는 버퍼 메모리 소모, 투명도 처리의 어려움, 그리고 두 면이 너무 붙어 있을 때 깜빡거리는 Z-fighting 현상 등이 있습니다."
-        },
-        {
-            q: "Scan-Line 알고리즘에서 가시성 판단을 위해 사용하는 데이터 구조는?",
-            o: ["Active Edge Table (AET)", "Color Table", "Light Table", "Modeling Table"],
-            a: 0,
-            e: "<b>해설:</b> 스캔 라인 방식은 현재 훑고 있는 가로선(Scan-line)에 걸쳐 있는 엣지(변) 정보들을 <b>AET(활성 엣지 테이블)</b>에 담아 관리하며 가시성을 판단합니다."
-        },
-        {
-            q: "후면 제거(Back-Face Culling)를 위해 면의 법선 벡터(N)와 시선 벡터(V)를 내적했을 때 결과가 0인 경우는?",
-            o: ["면이 카메라를 정면으로 보고 있다.", "면이 카메라를 등지고 있다.", "면과 시선이 수평(평행)하여 옆면만 보인다.", "물체가 투명하다."],
-            a: 2,
-            e: "<b>해설:</b> 내적값이 0이라는 것은 두 벡터의 각도가 90도라는 뜻입니다. 시선과 면의 법선이 수직이므로, 우리 눈에는 면의 두께(옆날)만 보이게 되는 경계 상황을 의미합니다."
-        },
-        {
-            q: "다음 중 가시성 판단을 'Object-Space'에서 수행하는 알고리즘은?",
-            o: ["Z-Buffer", "Scan-Line", "Ray-Casting", "Back-Face Culling"],
-            a: 3,
-            e: "<b>해설:</b> Back-Face Culling은 픽셀을 찍기 전, 3D 공간의 폴리곤 데이터(벡터) 단계에서 면의 방향을 계산하여 제거하므로 Object-Space 기법에 해당합니다. 나머지는 픽셀 단위로 비교하는 Image-Space 기법입니다."
-        },
-        {
-            q: "A-Buffer 알고리즘에서 'A'가 의미하는 것은?",
-            o: ["Alpha (투명도)", "Anti-aliased (안티앨리어싱)", "Area-averaged (영역 평균)", "위의 모든 것"],
-            a: 3,
-            e: "<b>해설:</b> A-버퍼는 Z-버퍼를 확장하여 픽셀 하나에 여러 물체 정보를 저장(Accumulation)하며, 이를 통해 투명도(Alpha)와 안티앨리어싱, 면적 기반 가시성 판단을 모두 가능하게 합니다."
-        },
-        {
-            q: "Z-fighting 현상이 일어나는 주된 원인은?",
-            o: ["조명이 너무 밝아서", "두 폴리곤의 깊이(z) 값이 너무 비슷하여 정밀도 한계로 앞뒤가 뒤섞여서", "물체가 너무 빨라서", "카메라가 반대로 뒤집혀서"],
-            a: 1,
-            e: "<b>해설:</b> 부동 소수점 연산의 한계로 인해, 매우 근접한 두 면의 z값을 컴퓨터가 명확히 구분하지 못하고 렌더링할 때마다 어떤 면이 앞인지 계산 결과가 달라져서 깜빡거리는 현상입니다."
-        },
-        {
-            q: "BSP-Tree에서 노드를 분할할 때 사용하는 기준은?",
-            o: ["색상", "임의의 평면(보통 폴리곤 평면)", "광원의 위치", "카메라의 화각"],
-            a: 1,
-            e: "<b>해설:</b> BSP(이진 공간 분할)는 공간에 있는 폴리곤 중 하나를 선택해 그 평면을 기준으로 공간을 '앞'과 '뒤' 두 구역으로 나누며 트리 구조를 형성합니다."
-        },
-        {
-            q: "Ray-Casting 알고리즘이 다른 기법보다 사실적인 이유는?",
-            o: ["물체를 정렬하기 때문에", "빛의 진행 경로(광선)를 시뮬레이션하기 때문에", "메모리를 적게 써서", "속도가 가장 빨라서"],
-            a: 1,
-            e: "<b>해설:</b> 픽셀 하나하나마다 카메라에서 빛을 쏘아 물체와 닿는 점을 찾으므로, 이론적으로 빛의 반사나 굴절 등을 가장 자연스럽게 묘사할 수 있는 기반이 됩니다."
-        },
-        {
-            q: "Visible Surface Detection 알고리즘 선택 시 고려사항이 아닌 것은?",
-            o: ["Complexity of the scene", "Memory requirements", "Color of the light source", "Hardware support"],
-            a: 2,
-            e: "<b>해설:</b> 가시성 판단은 '무엇이 보이는가'를 결정하는 단계이므로 광원의 색상과는 무관합니다. 장면의 복잡도, 메모리 성능, 하드웨어 가속 여부가 중요한 선택 기준이 됩니다."
-        },
-        {
-            q: "Area-Subdivision 알고리즘(Warnock)의 핵심 전략은?",
-            o: ["모든 물체를 정렬한다.", "화면을 더 작은 사각형 구역으로 쪼개며 가시성을 판단한다 (Divide and Conquer).", "광선을 무한히 쏜다.", "뒷면을 먼저 지운다."],
-            a: 1,
-            e: "<b>해설:</b> 화면 영역에 물체가 너무 겹쳐 판단이 복잡하면, 영역을 4개로 쪼개고 각 구역에서 다시 판단하는 과정을 반복하는 분할 정복(Divide & Conquer) 방식입니다."
-        },
-        {
-            q: "Painter's Algorithm에서 정렬 후 물체를 그리는 순서는?",
-            o: ["Back-to-front (뒤에서 앞으로)", "Front-to-back (앞에서 뒤로)", "무작위", "밝은 순서대로"],
-            a: 0,
-            e: "<b>해설:</b> 화가가 배경부터 칠하고 그 위에 전경을 덧칠하듯이, 가장 먼 물체(z값이 큰 것)부터 그리고 가까운 것을 나중에 그려서 덮어쓰는 방식입니다."
-        },
-        {
-            q: "다음 중 'Image-Space' 알고리즘의 특징이 아닌 것은?",
-            o: ["성능이 화면 해상도(Pixel 수)에 비례한다.", "정밀도가 픽셀 크기에 제한된다.", "물체의 기하학적 복잡도에만 성능이 좌우된다.", "대표적으로 Z-Buffer가 있다."],
-            a: 2,
-            e: "<b>해설:</b> Image-Space 기법은 물체가 아무리 복잡해도 결국 최종 픽셀 단위로만 비교하므로, 물체 개수보다는 화면의 해상도에 성능이 더 큰 영향을 받습니다. 물체 복잡도에 좌우되는 것은 Object-Space 기법입니다."
-        },
-        {
-            q: "Z-Buffer에서 1비트당 깊이 단계는 2배씩 늘어난다. 24비트 Z-Buffer가 표현할 수 있는 단계는?",
-            o: ["약 1,600만 단계", "24단계", "1,000단계", "무한대"],
-            a: 0,
-            e: "<b>해설:</b> $2^{24}$는 약 16,777,216입니다. 비트 수가 높을수록 더 세밀한 깊이 비교가 가능하여 Z-fighting 현상을 줄일 수 있습니다."
-        },
-        {
-            q: "Back-Face Culling을 적용했을 때 제거되는 면의 비율은 평균적으로 얼마인가?",
-            o: ["약 10%", "약 50%", "약 90%", "제거되지 않는다"],
-            a: 1,
-            e: "<b>해설:</b> 구체나 주전자 같은 닫힌 물체는 카메라 입장에서 항상 절반의 면만 보이고 나머지 절반은 뒤를 향하게 됩니다. 따라서 평균적으로 50%의 폴리곤이 제거됩니다."
-        },
-        {
-            q: "Octree 알고리즘이 가시성 판단에 쓰일 때의 원리는?",
-            o: ["색상을 8가지로 나눈다.", "3D 공간을 8개의 자식 노드로 분할하여 가시 영역을 탐색한다.", "8개의 카메라를 쓴다.", "빛을 8번 반사시킨다."],
-            a: 1,
-            e: "<b>해설:</b> Octree(8진 트리)는 3차원 공간을 8개의 정육면체 구역으로 재귀적으로 분할하여, 물체가 있는 구역만 선별적으로 렌더링하거나 가시성을 판단하는 데 효율적입니다."
-        },
-        {
-            q: "다음 중 가시성 판단 알고리즘이 아닌 것은?",
-            o: ["Z-Buffer", "Gouraud Shading", "BSP-Tree", "Painter's Algorithm"],
-            a: 1,
-            e: "<b>해설:</b> Gouraud Shading은 가시성이 판단된 후, 폴리곤 내부의 색을 채우는 '셰이딩(Shading)' 기술입니다."
-        },
-        {
-            q: "Z-Buffer 알고리즘에서 프레임 버퍼(Frame Buffer)의 역할은?",
-            o: ["깊이 값을 저장한다.", "최종 결정된 픽셀의 색상 값을 저장한다.", "물체의 좌표를 저장한다.", "광원의 위치를 저장한다."],
-            a: 1,
-            e: "<b>해설:</b> Z-버퍼는 깊이(z)를 저장하고, 프레임 버퍼는 우리가 실제로 모니터에서 보는 색상(Color)을 저장하는 메모리 공간입니다."
-        }
+        { q: "Z-Buffer의 초기값은?", o: ["0 (가까움)", "1 (멈)", "0.5", "-1"], a: 1, e: "<b>해설:</b> 가장 먼 상태(1.0)로 비워둬야 새로운 물체가 들어올 때 비교가 가능합니다." },
+        { q: "Back-Face Culling의 판단 근거는?", o: ["색상", "면의 법선과 시선의 내적", "물체의 크기", "광원의 위치"], a: 1, e: "<b>해설:</b> 법선과 시선의 각도가 90도 이상이면 뒷면으로 간주합니다." },
+        { q: "정렬(Sorting)이 필요한 은면 제거 알고리즘은?", o: ["Z-Buffer", "Painter's Algorithm", "Ray-Casting", "Back-face Culling"], a: 1, e: "<b>해설:</b> 멀리 있는 것부터 그려야 하므로 깊이 정렬이 필수입니다." },
+        { q: "Z-Buffer의 가장 큰 장점은?", o: ["메모리 절약", "투명도 처리", "물체 정렬 불필요", "빠른 조명"], a: 2, e: "<b>해설:</b> 그리는 순서에 상관없이 픽셀 단위로 비교하므로 정렬이 필요 없습니다." },
+        { q: "두 면의 깊이가 너무 비슷해 깜빡거리는 현상은?", o: ["Aliasing", "Z-fighting", "Mach Band", "Ghosting"], a: 1, e: "<b>해설:</b> 부동소수점 정밀도 한계로 앞뒤가 계속 바뀌는 현상입니다." },
+        { q: "Image-Space 알고리즘의 예시가 아닌 것은?", o: ["Z-Buffer", "Ray-Casting", "Back-Face Culling", "Scan-Line"], a: 2, e: "<b>해설:</b> 후면 제거(Back-Face)는 픽셀이 아닌 폴리곤 데이터 단계에서 수행됩니다." },
+        { q: "Painter's 알고리즘의 치명적 문제는?", o: ["속도가 너무 빠름", "순환 겹침(Cyclic Overlap) 해결 불가", "메모리 부족", "색상 부족"], a: 1, e: "<b>해설:</b> 세 물체가 서로 꼬여서 겹치면 정렬 순서를 정할 수 없습니다." },
+        { q: "BSP-Tree가 주로 쓰이는 곳은?", o: ["움직이는 캐릭터", "고정된 배경 건물", "광원 계산", "텍스처 생성"], a: 1, e: "<b>해설:</b> 고정된 공간을 미리 분할해두어 가시성을 빠르게 판단합니다." },
+        { q: "A-Buffer는 어떤 알고리즘의 확장인가?", o: ["Z-Buffer", "Ray-Tracing", "Flat Shading", "Clipping"], a: 0, e: "<b>해설:</b> Z-버퍼에 투명도와 안티앨리어싱을 더한 방식입니다." },
+        { q: "Scan-Line 알고리즘에서 현재 훑고 있는 변의 리스트는?", o: ["Edge Table", "Active Edge Table (AET)", "Color Table", "Z-Table"], a: 1, e: "<b>해설:</b> 현재 Y 좌표에 걸쳐 있는 변들만 AET에서 관리합니다." },
+        { q: "Object-Space 알고리즘의 특징은?", o: ["픽셀 단위 연산", "물체와 물체 간의 기하학적 비교", "해상도에 의존", "정렬이 필요 없음"], a: 1, e: "<b>해설:</b> 3D 공간상의 기하 데이터를 직접 비교합니다." },
+        { q: "Ray-Casting에서 보이는 면을 결정하는 기준은?", o: ["가장 큰 면", "광선과 부딪힌 점 중 가장 가까운 점", "가장 밝은 면", "가장 나중에 그려진 면"], a: 1, e: "<b>해설:</b> 눈에서 쏜 광선에 처음 맞은 표면이 보이는 면입니다." },
+        { q: "Z-Buffer에서 픽셀당 저장하는 값은?", o: ["RGB", "깊이(z) 값", "법선 벡터", "투명도"], a: 1, e: "<b>해설:</b> 해당 픽셀에서 지금까지 가장 가까웠던 물체의 깊이를 저장합니다." },
+        { q: "닫힌 입체에서 뒷면이 제거되는 비율은 보통?", o: ["10%", "50%", "90%", "0%"], a: 1, e: "<b>해설:</b> 평균적으로 전체 면의 절반이 카메라 반대편을 향합니다." },
+        { q: "가시성 판단을 위해 공간을 8개로 나누는 트리 구조는?", o: ["Binary Tree", "Quadtree", "Octree", "B-Tree"], a: 2, e: "<b>해설:</b> 3D 공간 분할에는 옥트리(Octree)가 쓰입니다." },
+        { q: "Warnock 알고리즘의 기본 전략은?", o: ["정렬", "분할 정복 (영역 나누기)", "광선 추적", "색상 혼합"], a: 1, e: "<b>해설:</b> 화면을 4등분씩 쪼개며 판단이 쉬워질 때까지 반복합니다." },
+        { q: "Z-Buffer의 정밀도를 높이려면?", o: ["비트(Bit) 수를 늘린다", "해상도를 낮춘다", "조명을 밝게 한다", "폴리곤을 줄인다"], a: 0, e: "<b>해설:</b> 16비트보다 24, 32비트 버퍼가 더 정밀하게 깊이를 비교합니다." },
+        { q: "Painter's 알고리즘에서 물체를 쪼개는(Splitting) 이유는?", o: ["밝게 하기 위해", "순환 겹침을 해결하기 위해", "그림자를 위해", "속도를 위해"], a: 1, e: "<b>해설:</b> 꼬인 폴리곤을 잘라야만 앞뒤 순서를 정할 수 있습니다." },
+        { q: "은면 제거의 다른 이름은?", o: ["Visibility Detection", "Shading", "Texturing", "Modeling"], a: 0, e: "<b>해설:</b> 보이는 면을 탐지하는 것과 같은 의미입니다." },
+        { q: "Z-Buffer 하드웨어 가속이 가능한 이유는?", o: ["정렬이 필요 없어서 병렬 처리가 쉽기 때문", "정렬이 빠르기 때문", "색이 적어서", "공식이 간단해서"], a: 0, e: "<b>해설:</b> 픽셀들이 서로 독립적으로 깊이만 비교하면 되므로 GPU 처리에 적합합니다." }
     ],
     ch9: [
-        {
-            q: "Phong Reflection Model에서 Ambient(주변광) 항이 필요한 이유는 무엇인가?",
-            o: ["하이라이트를 만들기 위해", "빛이 직접 닿지 않는 어두운 부분도 최소한의 시인성을 확보하기 위해", "그림자를 계산하기 위해", "거울 반사 효과를 위해"],
-            a: 1,
-            e: "<b>해설:</b> 현실 세계에서는 빛이 사방으로 반사되어 직접 광원이 없는 곳도 완전히 검지 않습니다. 국소 조명 모델에서는 이를 일일이 계산하기 힘들기 때문에, 모든 물체에 기본적으로 더해지는 '최소한의 밝기'인 Ambient를 도입하여 어두운 면이 묻히지 않게 합니다."
-        },
-        {
-            q: "Diffuse Reflection(확산 반사)의 세기가 최대가 되는 입사각은?",
-            o: ["0도 (표면에 수직으로 입사할 때)", "45도", "90도 (표면과 평행할 때)", "180도"],
-            a: 0,
-            e: "<b>해설:</b> Diffuse는 Lambert의 법칙($cos \theta$)에 비례합니다. $\theta$가 0도일 때 $cos(0) = 1$로 최댓값이 되며, 이는 빛이 면을 정면으로(수직으로) 비출 때 가장 밝다는 것을 의미합니다."
-        },
-        {
-            q: "Specular Reflection(정반사)을 계산할 때 반사 벡터(R)와 시선 벡터(V)의 내적값을 사용하는 이유는?",
-            o: ["면의 방향을 알기 위해", "반사된 빛이 관찰자의 눈으로 들어오는 정도를 측정하기 위해", "광원의 밝기를 알기 위해", "물체의 투명도를 알기 위해"],
-            a: 1,
-            e: "<b>해설:</b> 정반사는 거울처럼 빛이 튕겨 나가는 현상입니다. 반사된 빛의 방향(R)과 우리 눈의 방향(V)이 일치할수록(내적값이 1에 가까울수록) 가장 눈부신 하이라이트가 보이게 됩니다."
-        },
-        {
-            q: "광원의 종류 중 'Directional Light(방향성 광원)'의 특징은?",
-            o: ["전구처럼 한 지점에서 퍼져 나간다.", "태양처럼 매우 멀리 있어 모든 빛이 평행하게 들어온다.", "특정 각도로만 빛을 비춘다.", "가까울수록 급격히 밝아진다."],
-            a: 1,
-            e: "<b>해설:</b> 방향성 광원은 위치는 중요하지 않고 <b>방향</b>만 의미가 있습니다. 무한히 먼 곳에서 오는 것으로 간주하므로 물체의 위치와 상관없이 모든 표면에 동일한 각도로 빛이 들어옵니다."
-        },
-        {
-            q: "조명 모델에서 'Shininess(광택도)' 계수 n이 1일 때와 100일 때의 차이는?",
-            o: ["1일 때 하이라이트가 더 좁고 선명하다.", "100일 때 하이라이트가 훨씬 좁고 선명하게 집중된다.", "n값은 하이라이트 크기와 상관없다.", "100일 때 물체가 투명해진다."],
-            a: 1,
-            e: "<b>해설:</b> $cos^n \theta$ 식에서 지수 n이 커질수록 그래프가 급격히 좁아집니다. 이는 반사 방향과 시선 방향이 아주 조금만 어긋나도 빛이 급격히 약해진다는 뜻으로, 아주 매끄러운 금속 등에서 볼 수 있는 <b>좁고 강한 하이라이트</b>를 만듭니다."
-        },
-        {
-            q: "Lambertian Surface(람베르트 표면)란 무엇을 의미하는가?",
-            o: ["거울처럼 모든 빛을 반사하는 면", "모든 방향으로 빛을 균일하게 확산시키는 이상적인 거친 면", "빛을 전혀 반사하지 않는 면", "빛을 굴절시키는 면"],
-            a: 1,
-            e: "<b>해설:</b> 완벽한 난반사가 일어나는 표면을 말합니다. 어느 각도에서 보더라도 표면의 밝기가 일정하게 보이는 특징이 있으며, 분필이나 무광 종이 등이 이에 가깝습니다."
-        },
-        {
-            q: "Local Illumination 모델의 한계점으로 틀린 것은?",
-            o: ["그림자를 자동으로 계산하지 못한다.", "다른 물체에 반사된 간접광을 무시한다.", "물체 표면의 질감을 표현할 수 없다.", "거울에 비친 다른 물체의 모습을 표현하기 어렵다."],
-            a: 2,
-            e: "<b>해설:</b> 로컬 모델도 반사율 계수($K_d, K_s$)를 조절하여 질감을 충분히 표현할 수 있습니다. 한계점은 조명과 물체 1:1 관계만 따지기 때문에 그림자, 상호 반사, 굴절 등 <b>물체 간의 관계</b>를 모른다는 점입니다."
-        },
-        {
-            q: "조명 모델 계산 시 모든 벡터(N, L, V, R)는 어떤 상태여야 하는가?",
-            o: ["크기가 1인 단위 벡터(Normalized)", "정수 벡터", "동차 좌표계 w가 0인 벡터", "가장 긴 벡터"],
-            a: 0,
-            e: "<b>해설:</b> 내적(Dot Product)을 통해 각도의 코사인 값만 순수하게 얻어내려면, 벡터의 길이 성분이 1이어야 합니다. 그렇지 않으면 내적 결과에 길이에 따른 가중치가 붙어 밝기 계산이 틀어지게 됩니다."
-        },
-        {
-            q: "Point Light(점 광원)에서 빛의 감쇠(Attenuation)를 계산할 때 주로 사용하는 식의 형태는?",
-            o: ["거리에 비례하여 감소", "거리의 제곱에 반비례하여 감소 ($1/d^2$)", "거리에 상관없이 일정", "거리에 따라 지수적으로 증가"],
-            a: 1,
-            e: "<b>해설:</b> 물리적으로 빛은 사방으로 퍼지면서 면적이 거리의 제곱으로 늘어나므로 밝기는 $1/d^2$로 줄어듭니다. 그래픽스에서도 이를 구현하기 위해 2차 함수 형태의 감쇠 식을 적용합니다."
-        },
-        {
-            q: "조명 모델에서 $K_d, K_s$ 등의 계수가 의미하는 것은?",
-            o: ["광원의 세기", "물체 재질의 반사율 (0~1 사이의 값)", "카메라의 감도", "픽셀의 해상도"],
-            a: 1,
-            e: "<b>해설:</b> 해당 재질이 들어온 빛을 얼마나 흡수하고 반사할지를 결정하는 값입니다. $K_d$가 높으면 무광 재질처럼 보이고, $K_s$가 높으면 반짝이는 재질처럼 보이게 됩니다."
-        },
-        {
-            q: "물체의 색상(Color)은 조명 모델에서 어떻게 처리되는가?",
-            o: ["별도의 행렬로 곱한다.", "R, G, B 채널별로 각각 조명 공식을 적용한다.", "항상 흰색으로 계산 후 나중에 칠한다.", "가장 밝은 채널 하나만 계산한다."],
-            a: 1,
-            e: "<b>해설:</b> 조명 계산은 R, G, B 각각의 강도에 대해 독립적으로 수행됩니다. 빨간 물체라면 $K_d$의 Red 값이 크고 Blue, Green은 작게 설정되어 빨간색 빛만 주로 반사하게 됩니다."
-        },
-        {
-            q: "Specular 하이라이트 색상은 주로 어떤 색을 따르는가?",
-            o: ["물체 표면의 색상", "광원(빛)의 색상", "주변 환경의 색상", "항상 검은색"],
-            a: 1,
-            e: "<b>해설:</b> 난반사(Diffuse)는 물체의 색상을 보여주지만, 정반사(Specular)는 거울처럼 빛을 그대로 튕겨내는 것이므로 주로 <b>광원의 색상</b>이 그대로 하이라이트로 나타납니다. (예: 노란 조명 아래의 파란 당구공 하이라이트는 노란색)"
-        },
-        {
-            q: "조명 계산이 수행되는 좌표계는 주로 어디인가?",
-            o: ["모델 좌표계", "월드 좌표계 또는 뷰 좌표계", "장치 좌표계", "정규화 좌표계"],
-            a: 1,
-            e: "<b>해설:</b> 광원과 물체, 카메라의 상대적 위치가 정확히 보존된 월드 좌표계나 뷰 좌표계에서 수행됩니다. 정규화 좌표계는 공간이 찌그러져 있어 각도가 왜곡될 수 있기 때문에 조명 계산에는 적합하지 않습니다."
-        },
-        {
-            q: "반사 벡터 R을 구하기 위해 필요한 두 벡터는? (L:광원 방향, N:법선 벡터)",
-            o: ["L과 N", "L과 V", "V와 N", "L과 R"],
-            a: 0,
-            e: "<b>해설:</b> 입사각과 반사각은 같다는 원리를 이용해, 들어오는 빛의 방향(L)을 법선(N)에 대칭시켜 반사 방향(R)을 산출합니다."
-        },
-        {
-            q: "조명 모델에서 'Light Intensity'가 1.0을 초과할 경우의 처리는?",
-            o: ["값을 그대로 사용한다.", "최댓값인 1.0으로 고정(Clamping)한다.", "0으로 만든다.", "어둡게 줄인다."],
-            a: 1,
-            e: "<b>해설:</b> 모니터가 표현할 수 있는 최대 밝기는 제한되어 있습니다. 계산 결과가 1.0(최대)보다 크더라도 화면에는 가장 밝은 흰색인 1.0으로 표현되도록 값을 고정합니다."
-        },
-        {
-            q: "Global Illumination 기법 중 하나로, 광선이 반사되는 모든 경로를 추적하는 방식은?",
-            o: ["Z-Buffering", "Ray Tracing", "Flat Shading", "Clipping"],
-            a: 1,
-            e: "<b>해설:</b> 레이 트레이싱은 광선을 하나하나 추적하여 반사, 굴절, 그림자 등을 물리적으로 계산하는 대표적인 전역 조명 기법입니다."
-        },
-        {
-            q: "Lambertian Reflection 공식 $I = K_d \cdot I_L \cdot (N \cdot L)$에서 결과가 음수가 나오면?",
-            o: ["그대로 그린다.", "0으로 처리한다 (빛이 닿지 않는 뒷면).", "절댓값을 취한다.", "밝기를 반전시킨다."],
-            a: 1,
-            e: "<b>해설:</b> 내적값이 음수라는 것은 빛이 면의 뒤쪽에서 들어온다는 뜻입니다. 즉, 해당 면은 빛을 받을 수 없는 그림자 영역이므로 밝기를 0으로 처리합니다."
-        },
-        {
-            q: "조명 효과 중 'Half-angle vector(H)'를 사용하는 Blinn-Phong 모델의 장점은?",
-            o: ["더 사실적이다.", "R벡터를 매번 구하는 것보다 계산 속도가 빠르다.", "하이라이트가 사라진다.", "그림자가 부드러워진다."],
-            a: 1,
-            e: "<b>해설:</b> R벡터를 구하는 공식은 다소 복잡합니다. 대신 L과 V의 중간 벡터인 H를 미리 구해 N과 내적하면, 비슷한 하이라이트 효과를 훨씬 빠르게 계산할 수 있어 실시간 그래픽스에서 선호됩니다."
-        },
-        {
-            q: "Area Light(면 광원)가 생성하는 그림자의 특징은?",
-            o: ["그림자가 생기지 않는다.", "경계가 아주 날카롭다.", "경계가 부드러운 반그림자(Penumbra)가 생긴다.", "항상 원형이다."],
-            a: 2,
-            e: "<b>해설:</b> 점 광원은 칼날 같은 그림자를 만들지만, 면적이 있는 광원은 빛이 일부만 가려지는 영역이 생기기 때문에 경계가 뭉개지는 부드러운 그림자를 만듭니다."
-        },
-        {
-            q: "Phong 조명 모델은 물리학적으로 완전히 정확한 모델인가?",
-            o: ["그렇다.", "아니오, 시각적 유사성을 위해 단순화된 근사 모델이다.", "오직 거울에만 정확하다.", "수학적으로 틀린 모델이다."],
-            a: 1,
-            e: "<b>해설:</b> 퐁 모델은 실제 빛의 물리적 거동을 완벽히 모사하기보다는, 적은 계산량으로 <b>그럴듯하게 보이도록</b> 만든 경험적(Empirical) 모델입니다."
-        }
+        { q: "주변광(Ambient)의 특징은?", o: ["그림자가 생김", "방향성이 없고 모든 면에 균일하게 적용", "거리에 따라 변함", "반짝거림"], a: 1, e: "<b>해설:</b> 간접광을 흉내 낸 기본 밝기입니다." },
+        { q: "난반사(Diffuse)가 최대가 되는 조건은? (N:법선, L:광원)", o: ["N과 L이 수직", "N과 L이 나란함 (내적=1)", "N과 L의 각도가 180도", "관찰자가 정면에 있음"], a: 1, e: "<b>해설:</b> 빛이 면을 수직으로 비출 때 가장 밝습니다." },
+        { q: "정반사(Specular) 하이라이트의 크기를 좁히는 파라미터는?", o: ["Ambient 계수", "Shininess (n)", "Diffuse 계수", "거리"], a: 1, e: "<b>해설:</b> 지수 n이 클수록 반짝임이 좁고 선명해집니다." },
+        { q: "Lambert의 법칙과 관련 있는 것은?", o: ["주변광", "난반사", "정반사", "굴절"], a: 1, e: "<b>해설:</b> 난반사 밝기는 코사인 각도에 비례한다는 법칙입니다." },
+        { q: "퐁 조명 모델의 세 가지 합은?", o: ["A + D + S", "A + D + T", "D + S + T", "A + S + R"], a: 0, e: "<b>해설:</b> Ambient, Diffuse, Specular의 합입니다." },
+        { q: "태양광처럼 평행하게 들어오는 광원은?", o: ["Point", "Spot", "Directional", "Area"], a: 2, e: "<b>해설:</b> 위치 없이 방향만 있는 광원입니다." },
+        { q: "Local Illumination 모델에서 무시되는 것은?", o: ["직접광", "물체 간 반사(간접광)", "물체 색상", "법선"], a: 1, e: "<b>해설:</b> 광원에서 직접 오는 빛만 따지고 다른 물체에 튕겨오는 빛은 무시합니다." },
+        { q: "반사 벡터(R)를 구할 때 필요한 것은?", o: ["L과 N", "L과 V", "V와 N", "L만"], a: 0, e: "<b>해설:</b> 입사광과 법선을 기준으로 튕겨 나가는 방향을 구합니다." },
+        { q: "정반사 하이라이트의 색은 주로 무엇을 따르는가?", o: ["물체 색", "광원 색", "검은색", "배경색"], a: 1, e: "<b>해설:</b> 거울처럼 빛을 그대로 튕기므로 광원의 색이 나타납니다." },
+        { q: "Attenuation(감쇠)은 무엇에 따른 빛의 약화를 말하나?", o: ["각도", "시간", "거리", "두께"], a: 2, e: "<b>해설:</b> 광원에서 멀어질수록 빛이 약해지는 현상입니다." },
+        { q: "Blinn-Phong 모델에서 사용하는 중간 벡터는?", o: ["N", "L", "H (Halfway)", "V"], a: 2, e: "<b>해설:</b> L과 V의 중간 벡터를 써서 연산 속도를 높입니다." },
+        { q: "난반사율 $K_d$가 0이면 물체는 어떻게 보이나?", o: ["매우 밝음", "무광 검정 (빛을 흡수함)", "투명함", "거울 같음"], a: 1, e: "<b>해설:</b> 확산되는 빛이 없으므로 어둡게 보입니다." },
+        { q: "스포트라이트에서 빛이 퍼지는 범위를 결정하는 것은?", o: ["밝기", "Cut-off 각도", "색상", "거리"], a: 1, e: "<b>해설:</b> 원뿔 모양의 시야각을 설정합니다." },
+        { q: "자체적으로 빛을 내는 효과는?", o: ["Ambient", "Emission", "Specular", "Diffuse"], a: 1, e: "<b>해설:</b> Emission 항은 스스로 빛나는 물체를 표현합니다." },
+        { q: "조명 계산 시 벡터들을 정규화(Normalize)하는 이유는?", o: ["색을 밝게 하려고", "내적값이 코사인 각도만 나타내게 하려고", "길이를 늘리려고", "0으로 만들려고"], a: 1, e: "<b>해설:</b> 벡터 길이가 1이어야 순수한 각도 계산이 가능합니다." },
+        { q: "현실적인 그림자를 표현하려면 어떤 광원이 필요한가?", o: ["Point", "Area (면)", "Directional", "Ambient"], a: 1, e: "<b>해설:</b> 면 광원은 부드러운 반그림자를 만듭니다." },
+        { q: "조명 모델에서 결과값이 1.0을 넘으면?", o: ["그대로 둠", "1.0으로 고정 (Clamping)", "0으로 둠", "반전"], a: 1, e: "<b>해설:</b> 모니터 최대 밝기 한계로 인해 1.0으로 자릅니다." },
+        { q: "전역 조명 모델(Global)의 예시는?", o: ["Phong", "Ray Tracing", "Flat", "Gouraud"], a: 1, e: "<b>해설:</b> 광선을 추적하여 모든 반사를 계산하는 레이 트레이싱이 대표적입니다." },
+        { q: "재질의 속성 중 거울 반사에 가까운 것은?", o: ["Ambient", "Diffuse", "Specular", "None"], a: 2, e: "<b>해설:</b> Specular가 정반사 성질입니다." },
+        { q: "조명 공식에서 내적($\cdot$) 결과가 음수면?", o: ["0으로 처리", "절댓값", "1로 처리", "어둡게 함"], a: 0, e: "<b>해설:</b> 빛이 면의 뒤쪽에서 오고 있다는 뜻이므로 0(검정)입니다." }
     ],
     ch10: [
-        {
-            q: "Gouraud Shading에서 발생하는 'Mach Band Effect'의 원인은 무엇인가?",
-            o: ["조명이 너무 밝아서", "인접한 면 사이의 밝기 변화율이 불연속적이어서 눈이 대비를 과장하기 때문", "해상도가 낮아서", "벡터 연산 오류 때문에"],
-            a: 1,
-            e: "<b>해설:</b> 고로 셰이딩은 색상을 선형적으로 보간하는데, 면과 면이 만나는 경계에서 이 변화율이 꺾이게 됩니다. 우리 눈의 시각 시스템은 이런 꺾이는 경계 부분의 대비를 실제보다 더 강하게 인식하여 밝거나 어두운 띠가 보이는 마하 밴드 현상을 만듭니다."
-        },
-        {
-            q: "Phong Shading이 Gouraud Shading보다 하이라이트 표현에 유리한 수학적 이유는?",
-            o: ["색상을 픽셀마다 계산하기 때문에", "법선 벡터(Normal)를 보간하여 각 픽셀의 정확한 반사각을 구하기 때문에", "더 밝은 색을 쓰기 때문에", "정렬을 하기 때문에"],
-            a: 1,
-            e: "<b>해설:</b> 고로 셰이딩은 정점의 색만 섞으므로 정점 사이에 있는 하이라이트 정보를 잃어버립니다. 하지만 퐁 셰이딩은 <b>면의 방향(법선)</b>을 픽셀마다 정밀하게 섞어서 조명 공식을 다시 돌리므로, 정점 사이에 숨은 하이라이트 위치를 정확히 찾아낼 수 있습니다."
-        },
-        {
-            q: "Flat Shading이 사용되기에 적합하지 않은 경우는?",
-            o: ["각진 상자를 그릴 때", "부드러운 사람의 얼굴이나 곡면을 그릴 때", "빠른 미리보기가 필요할 때", "저사양 기기에서 실행할 때"],
-            a: 1,
-            e: "<b>해설:</b> 플랫 셰이딩은 폴리곤의 경계가 뚜렷하게 보입니다. 사람의 피부나 공 같은 매끄러운 곡면을 플랫 셰이딩으로 그리면 마치 다이아몬드처럼 각진 폴리곤 덩어리로 보여 사실감이 크게 떨어집니다."
-        },
-        {
-            q: "안티앨리어싱 기법 중 'Area Sampling'의 원리는?",
-            o: ["화면을 크게 그린다.", "픽셀의 면적 중 물체가 차지하는 비율만큼 색상을 혼합한다.", "무작위로 점을 찍는다.", "가장 밝은 색만 선택한다."],
-            a: 1,
-            e: "<b>해설:</b> 픽셀을 하나의 점이 아닌 작은 사각형 면적으로 보고, 삼각형이 그 면적의 30%를 덮고 있다면 배경색 70%, 삼각형 색 30%를 섞어서 칠하는 정밀한 방식입니다."
-        },
-        {
-            q: "Bilinear Interpolation(쌍선형 보간)이 셰이딩에서 쓰이는 용도는?",
-            o: ["물체를 회전시키기 위해", "네 개의 정점 사이의 값을 가로와 세로 방향으로 순차적으로 보간하여 내부 값을 채우기 위해", "조명을 끄기 위해", "그림자를 지우기 위해"],
-            a: 1,
-            e: "<b>해설:</b> 사각형이나 삼각형 내부의 픽셀 값을 정점 3~4개의 값으로부터 부드럽게 채워나갈 때 사용하는 2D 보간 기술입니다. 셰이딩뿐만 아니라 텍스처 확대 시에도 널리 쓰입니다."
-        },
-        {
-            q: "Super-sampling 안티앨리어싱의 치명적인 단점은?",
-            o: ["품질이 나쁘다.", "메모리와 연산 비용이 해상도의 제곱에 비례하여 급격히 늘어난다.", "색상이 왜곡된다.", "곡면 처리가 안 된다."],
-            a: 1,
-            e: "<b>해설:</b> 2배 슈퍼샘플링만 해도 내부적으로는 4배의 픽셀을 처리해야 합니다. 화면을 아주 정교하게 만들지만, 그래픽 카드의 자원을 엄청나게 소모하므로 실시간 게임에서는 성능 타협이 필요합니다."
-        },
-        {
-            q: "셰이딩 연산 중 'Incremental Calculation'을 사용하는 이유는 무엇인가?",
-            o: ["더 정확한 값을 위해", "인접 픽셀 간의 공통 부분을 재사용하여 연산 속도를 극대화하기 위해", "물체를 크게 그리기 위해", "색상을 반전시키기 위해"],
-            a: 1,
-            e: "<b>해설:</b> Spatial Coherence 성질을 이용하는 것입니다. 옆 픽셀로 이동할 때 조명 값을 처음부터 다 계산하지 않고, 이전 픽셀 값에 변화량(기울기)만 더해주는 방식을 써서 속도를 비약적으로 높입니다."
-        },
-        {
-            q: "Gouraud Shading에서 폴리곤 내부의 하이라이트가 사라지는 현상을 부르는 말은?",
-            o: ["Specular Highlight Smearing/Missing", "Mach Band", "Aliasing", "Flickering"],
-            a: 0,
-            e: "<b>해설:</b> 정점에서의 조명 강도만 보간하기 때문에 정점보다 밝은 하이라이트 부분이 보간 과정에서 평균화되어 사라지는 현상입니다."
-        },
-        {
-            q: "다음 중 셰이딩 속도가 빠른 순서대로 나열된 것은?",
-            o: ["Flat > Gouraud > Phong", "Phong > Gouraud > Flat", "Gouraud > Flat > Phong", "Flat > Phong > Gouraud"],
-            a: 0,
-            e: "<b>해설:</b> 계산이 단순할수록 빠릅니다. 면당 1번(Flat) > 정점당 1번(Gouraud) > 픽셀당 1번(Phong) 순서입니다."
-        },
-        {
-            q: "10장에서 언급된 'Sampling'의 정의로 옳은 것은?",
-            o: ["물체를 회전시키는 것", "연속적인 기하 데이터를 이산적인 픽셀 데이터로 추출하는 과정", "색상을 섞는 것", "그림자를 계산하는 것"],
-            a: 1,
-            e: "<b>해설:</b> 무한히 매끄러운 3D 물체를 모니터의 픽셀이라는 고정된 격자 칸에 맞춰 "여기에 물체가 있나?"라고 확인하며 점을 찍는 행위 자체가 샘플링입니다."
-        },
-        {
-            q: "Jaggies(계단 현상)가 발생하는 근본적인 이유는?",
-            o: ["모니터 밝기가 낮아서", "연속적인 선을 불연속적인 픽셀 격자로 표현하는 과정에서 발생하는 샘플링 에러 때문", "물체가 너무 작아서", "셰이딩이 잘못되어서"],
-            a: 1,
-            e: "<b>해설:</b> 픽셀이 사각형 모양의 점이기 때문에 대각선을 그릴 때 계단처럼 꺾여 보일 수밖에 없습니다. 이것을 디지털 신호 처리 관점에서는 앨리어싱(Aliasing)이라고 부릅니다."
-        },
-        {
-            q: "Phong Shading의 보간 방식인 'Normal Vector Interpolation'을 수행할 때 주의점은?",
-            o: ["벡터의 방향을 반대로 한다.", "보간된 후의 벡터 길이가 1이 아니므로 다시 정규화(Renormalize)해야 한다.", "벡터를 더하지 않는다.", "항상 0으로 만든다."],
-            a: 1,
-            e: "<b>해설:</b> 두 단위 벡터(길이 1)를 보간(평균)하면 결과 벡터의 길이는 1보다 작아집니다. 이를 그대로 조명 공식에 쓰면 물체가 어둡게 나오므로, 픽셀마다 보간된 벡터를 다시 길이 1로 만들어주는 정규화 과정이 필요합니다."
-        },
-        {
-            q: "스캔 라인 폴리곤 채우기에서 'Edge Table'에 저장되지 않는 정보는?",
-            o: ["y_max (변이 끝나는 y좌표)", "x_min (시작 x좌표)", "1/m (기울기의 역수)", "물체의 반사율 계수"],
-            a: 3,
-            e: "<b>해설:</b> 엣지 테이블은 폴리곤의 <b>모양(경계선)</b>을 픽셀로 바꾸기 위한 기하 정보(위치, 기울기 등)를 담습니다. 반사율 같은 재질 정보는 셰이딩 단계에서 따로 처리합니다."
-        },
-        {
-            q: "Post-filtering 안티앨리어싱 기법의 다른 이름은?",
-            o: ["Super-sampling", "Area-sampling", "Flat shading", "Z-buffering"],
-            a: 0,
-            e: "<b>해설:</b> 일단 샘플을 많이 뽑은(Super-sampling) 후, 나중에 필터링을 거쳐 픽셀 색을 결정한다는 의미에서 Post-filtering이라고도 합니다."
-        },
-        {
-            q: "Phong Shading 모델이 곡면 표현에 뛰어난 이유는?",
-            o: ["더 많은 폴리곤을 쓰기 때문에", "픽셀마다 법선이 변하므로 실제 곡면의 법선 변화를 더 가깝게 흉내 내기 때문", "텍스처를 입히기 때문", "그림자가 있어서"],
-            a: 1,
-            e: "<b>해설:</b> 실제 곡면은 매 지점마다 법선이 다릅니다. 퐁 셰이딩은 이를 흉내 내어 픽셀마다 법선을 미세하게 회전시키며 계산하므로 평평한 폴리곤을 마치 둥근 면처럼 보이게 하는 착시를 완벽히 만들어냅니다."
-        },
-        {
-            q: "Polygon Shading 과정에서 'Rasterization'의 의미는?",
-            o: ["모델을 회전시키는 것", "기하학적 도형을 픽셀들의 집합으로 바꾸는 과정", "광원을 설치하는 것", "파일로 저장하는 것"],
-            a: 1,
-            e: "<b>해설:</b> 래스터화(Rasterization)는 수학적인 선과 면을 디지털 화면의 점(픽셀) 데이터로 변환하는 렌더링 파이프라인의 핵심 단계입니다."
-        },
-        {
-            q: "다음 중 Gouraud Shading으로 렌더링했을 때 가장 어색하게 보일 물체는?",
-            o: ["반짝이는 당구공", "무광 플라스틱 상자", "종이 상자", "진흙 덩어리"],
-            a: 0,
-            e: "<b>해설:</b> 반짝이는 물체는 선명한 하이라이트가 생명인데, 고로 셰이딩은 하이라이트를 뭉개버리기 때문에 당구공이 매우 탁하고 어색하게 보일 것입니다."
-        },
-        {
-            q: "안티앨리어싱을 적용하면 시각적으로 어떤 느낌이 드는가?",
-            o: ["더 날카로워진다.", "경계가 다소 부드럽고(Blurry) 매끄럽게 느껴진다.", "색상이 원색으로 변한다.", "물체가 더 각져 보인다."],
-            a: 1,
-            e: "<b>해설:</b> 계단 현상을 중간색으로 메우기 때문에 확대해 보면 약간 흐릿해 보일 수 있지만, 전체적으로는 훨씬 부드럽고 자연스러운 선으로 인식됩니다."
-        },
-        {
-            q: "Pre-filtering 안티앨리어싱의 특징은?",
-            o: ["그린 후에 처리한다.", "렌더링 과정 중에 픽셀의 면적 비율을 미리 계산하여 색을 입힌다.", "조명을 끄는 기술이다.", "항상 흑백으로 만든다."],
-            a: 1,
-            e: "<b>해설:</b> 'Pre'라는 말처럼 픽셀을 찍기 전에 미리 면적 계산(Area sampling) 등을 수행하여 앨리어싱을 방지하는 방식입니다."
-        },
-        {
-            q: "Phong 셰이딩이 현대 GPU에서 실시간으로 가능한 이유는?",
-            o: ["계산이 갑자기 쉬워져서", "하드웨어가 픽셀 단위 병렬 연산(Pixel Shader)에 최적화되었기 때문", "폴리곤을 적게 써서", "조명 모델을 안 써서"],
-            a: 1,
-            e: "<b>해설:</b> 과거에는 퐁 셰이딩의 연산량이 부담스러웠지만, 현대 그래픽 카드는 수천 개의 코어가 각 픽셀을 동시에 계산할 수 있는 구조(셰이더)를 가지고 있어 실시간 구현이 당연해졌습니다."
-        }
+        { q: "Flat Shading의 특징은?", o: ["부드러움", "폴리곤 전체를 하나의 색으로 칠함", "가장 느림", "하이라이트가 선명함"], a: 1, e: "<b>해설:</b> 면마다 계산을 한 번만 해서 속도가 가장 빠릅니다." },
+        { q: "Gouraud Shading의 보간 대상은?", o: ["법선", "색상(Intensity)", "좌표", "텍스처"], a: 1, e: "<b>해설:</b> 꼭짓점 색을 구한 뒤 내부를 섞습니다." },
+        { q: "Phong Shading의 보간 대상은?", o: ["법선(Normal)", "색상", "좌표", "빛"], a: 0, e: "<b>해설:</b> 법선 벡터를 픽셀마다 보간하여 다시 조명을 계산합니다." },
+        { q: "Gouraud Shading의 단점은?", o: ["너무 느림", "하이라이트 뭉개짐", "각져 보임", "어두움"], a: 1, e: "<b>해설:</b> 정점에서만 계산하므로 가운데 하이라이트를 놓칩니다." },
+        { q: "밝기 변화율 때문에 생기는 띠 현상은?", o: ["Aliasing", "Mach Band", "Z-fighting", "Ghosting"], a: 1, e: "<b>해설:</b> 셰이딩 경계면에서 눈이 대비를 과장해 느끼는 착시입니다." },
+        { q: "계단 현상을 줄이는 기술은?", o: ["Anti-Aliasing", "Shading", "Modeling", "Mapping"], a: 0, e: "<b>해설:</b> 픽셀 경계를 부드럽게 섞어줍니다." },
+        { q: "슈퍼샘플링의 원리는?", o: ["작게 그리기", "크게 렌더링 후 축소 (평균화)", "색을 뺌", "선을 굵게 함"], a: 1, e: "<b>해설:</b> 고해상도로 계산한 뒤 원래 크기로 줄여 부드럽게 만듭니다." },
+        { q: "옆 픽셀 값을 재활용하는 성질은?", o: ["Spatial Coherence", "Temporal Coherence", "Randomness", "Flatness"], a: 0, e: "<b>해설:</b> 공간적으로 가까우면 비슷하다는 성질입니다." },
+        { q: "가장 사실적이지만 계산량이 많은 셰이딩은?", o: ["Flat", "Gouraud", "Phong", "Wireframe"], a: 2, e: "<b>해설:</b> 픽셀마다 조명 계산을 하는 퐁 셰이딩이 가장 무겁습니다." },
+        { q: "셰이딩이 일어나는 단계는?", o: ["Modeling", "Viewing", "Scan Conversion (Rasterization)", "Projection"], a: 2, e: "<b>해설:</b> 픽셀을 채우는 래스터화 단계에서 수행됩니다." },
+        { q: "Jaggies의 원인은?", o: ["샘플링 에러 (픽셀이 사각형이라서)", "조명 부족", "메모리 부족", "색상 부족"], a: 0, e: "<b>해설:</b> 매끄러운 선을 네모난 점들로 표현하려니 생기는 문제입니다." },
+        { q: "Gouraud Shading이 Phong보다 빠른 이유는?", o: ["정점에서만 조명 계산을 하므로", "법선이 많아서", "색이 적어서", "정렬을 해서"], a: 0, e: "<b>해설:</b> 픽셀당 계산 대신 픽셀당 단순 보간만 하기 때문입니다." },
+        { q: "픽셀에 물체가 걸친 면적만큼 색을 칠하는 방식은?", o: ["Area Sampling", "Point Sampling", "Super Sampling", "Z-buffering"], a: 0, e: "<b>해설:</b> 픽셀 내 면적 비율로 안티앨리어싱을 합니다." },
+        { q: "Phong Shading 시 법선 보간 후 해야 할 일은?", o: ["버림", "정규화 (Renormalize)", "회전", "더하기"], a: 1, e: "<b>해설:</b> 보간된 벡터는 길이가 1이 아니므로 다시 1로 맞춰야 조명이 정확합니다." },
+        { q: "안티앨리어싱을 하면 화면이 어떻게 느껴지나?", o: ["날카로움", "부드러움 (매끄러움)", "어두움", "번쩍임"], a: 1, e: "<b>해설:</b> 계단이 사라지고 부드러워 보입니다." },
+        { q: "Mach Band를 줄이려면 어떤 셰이딩이 좋나?", o: ["Flat", "Phong", "Wireframe", "None"], a: 1, e: "<b>해설:</b> 변화율이 부드러운 퐁 셰이딩이 가장 효과적입니다." },
+        { q: "샘플링과 복원(Reconstruction)은 무엇의 기초 이론인가?", o: ["안티앨리어싱", "그림자", "투명도", "모델링"], a: 0, e: "<b>해설:</b> 디지털 신호를 화면에 다시 그리는 전반적인 원리입니다." },
+        { q: "Gouraud Shading에서 마하 밴드가 나타나는 곳은?", o: ["정점 부근", "폴리곤의 경계선", "광원 아래", "화면 구석"], a: 1, e: "<b>해설:</b> 면과 면이 만나는 곳의 밝기 변화가 급격할 때 생깁니다." },
+        { q: "현대 GPU 픽셀 셰이더에서 주로 수행하는 셰이딩은?", o: ["Flat", "Phong (Per-pixel lighting)", "Gouraud", "Wireframe"], a: 1, e: "<b>해설:</b> 성능이 좋아져서 이제는 픽셀 단위 셰이딩이 기본입니다." },
+        { q: "래스터화 시 폴리곤 내부인지 판단하는 기준은?", o: ["색상", "스캔라인과 엣지의 교차 (Inside-Outside test)", "Z값", "법선"], a: 1, e: "<b>해설:</b> 엣지들 사이의 픽셀들을 찾아내는 과정입니다." }
     ]
 };
 
 let currentSet = [];
-let currentIndex = 0;
-let userScore = 0;
+let currIdx = 0;
+let score = 0;
 
 function initQuiz(type) {
-    document.getElementById('main-menu').style.display = 'none';
-    document.getElementById('quiz-card').classList.add('active');
-    
+    document.getElementById('card').classList.add('active');
     if(type === 'all') {
         const all = [...db.ch7, ...db.ch8, ...db.ch9, ...db.ch10];
         currentSet = all.sort(() => Math.random() - 0.5).slice(0, 20);
-        document.getElementById('chap-label').innerText = "🏆 전체 종합 모의고사";
+        document.getElementById('chap-name').innerText = "🏆 전체 종합 모의고사";
     } else {
         currentSet = [...db[type]];
-        const titles = {ch7:"7장. 3D Viewing", ch8:"8장. 은면 제거", ch9:"9장. 조명 모델", ch10:"10장. 셰이딩"};
-        document.getElementById('chap-label').innerText = titles[type];
+        const names = {ch7:"7장. 3D Viewing", ch8:"8장. 은면 제거", ch9:"9장. 조명 모델", ch10:"10장. 셰이딩"};
+        document.getElementById('chap-name').innerText = names[type];
     }
-    
-    currentIndex = 0;
-    userScore = 0;
+    currIdx = 0; score = 0;
     render();
 }
 
 function render() {
-    const data = currentSet[currentIndex];
-    document.getElementById('idx-label').innerText = `${currentIndex + 1} / ${currentSet.length}`;
-    document.getElementById('progress-fill').style.width = `${((currentIndex+1)/currentSet.length)*100}%`;
+    const data = currentSet[currIdx];
+    document.getElementById('q-idx').innerText = `${currIdx + 1} / ${currentSet.length}`;
+    document.getElementById('fill').style.width = `${((currIdx+1)/currentSet.length)*100}%`;
     document.getElementById('q-text').innerText = data.q;
     
-    const list = document.getElementById('options-list');
+    const list = document.getElementById('opt-list');
     list.innerHTML = '';
-    
-    data.o.forEach((txt, i) => {
+    data.o.forEach((t, i) => {
         const div = document.createElement('div');
-        div.className = 'option-item';
-        div.innerText = txt;
+        div.className = 'option';
+        div.innerText = t;
         div.onclick = () => select(i);
         list.appendChild(div);
     });
-    
+
     document.getElementById('exp-box').style.display = 'none';
-    document.getElementById('prev-btn').disabled = currentIndex === 0;
-    document.getElementById('next-btn').innerText = currentIndex === currentSet.length - 1 ? "종료" : "다음";
-
-    // 이미 푼 경우 복구
-    if(data.userAns !== undefined) {
-        showResult(data.userAns);
-    }
+    document.getElementById('p-btn').disabled = currIdx === 0;
+    document.getElementById('n-btn').innerText = currIdx === currentSet.length - 1 ? "종료" : "다음";
+    
+    if(data.user !== undefined) show(data.user);
 }
 
-function select(idx) {
-    const data = currentSet[currentIndex];
-    if(data.userAns !== undefined) return;
-    
-    data.userAns = idx;
-    if(idx === data.a) userScore++;
-    showResult(idx);
+function select(i) {
+    if(currentSet[currIdx].user !== undefined) return;
+    currentSet[currIdx].user = i;
+    if(i === currentSet[currIdx].a) score++;
+    show(i);
 }
 
-function showResult(idx) {
-    const data = currentSet[currentIndex];
-    const items = document.querySelectorAll('.option-item');
-    
-    items.forEach((item, i) => {
-        item.classList.add('disabled');
-        if(i === data.a) item.classList.add('correct');
-        else if(i === idx) item.classList.add('incorrect');
+function show(i) {
+    const data = currentSet[currIdx];
+    const opts = document.querySelectorAll('.option');
+    opts.forEach((o, idx) => {
+        o.classList.add('disabled');
+        if(idx === data.a) o.classList.add('correct');
+        else if(idx === i) o.classList.add('incorrect');
     });
-    
-    const expBox = document.getElementById('exp-box');
-    expBox.innerHTML = `<span class="exp-title">📝 정답 상세 해설</span>${data.e}`;
-    expBox.style.display = 'block';
+    const exp = document.getElementById('exp-box');
+    exp.innerHTML = `<strong>📝 해설</strong><br>${data.e}`;
+    exp.style.display = 'block';
 }
 
-function move(step) {
-    if(step === 1 && currentIndex === currentSet.length - 1) {
-        alert(`수고하셨습니다!\n점수: ${userScore} / ${currentSet.length} (${Math.round(userScore/currentSet.length*100)}점)`);
+function move(d) {
+    if(d === 1 && currIdx === currentSet.length - 1) {
+        alert(`완료! 점수: ${score} / ${currentSet.length}`);
         location.reload();
         return;
     }
-    currentIndex += step;
+    currIdx += d;
     render();
 }
 </script>
-
 </body>
 </html>
