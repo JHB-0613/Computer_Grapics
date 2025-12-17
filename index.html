@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴퓨터 그래픽스 기말고사 대비 퀴즈 (Ch.07-10)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 700px;
+        }
+        .progress {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+        .question {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-btn {
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #f0f8ff;
+            border-color: #4a90e2;
+        }
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .option-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95em;
+            line-height: 1.5;
+            border-left: 5px solid #4a90e2;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        .control-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .control-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .control-btn:hover:not(:disabled) {
+            background-color: #357abd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="progress" id="progress">문제 1 / 10</div>
+    <div class="question" id="question-text">문제 내용이 여기에 표시됩니다.</div>
+    <div class="options" id="options-container">
+        </div>
+    <div class="explanation" id="explanation">
+        </div>
+    <div class="controls">
+        <button class="control-btn" id="prev-btn" onclick="changeQuestion(-1)">이전</button>
+        <button class="control-btn" id="next-btn" onclick="changeQuestion(1)">다음</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "1. [Ch.07] 3D 그래픽스 뷰잉 파이프라인(Viewing Pipeline)의 올바른 좌표 변환 순서는?",
+            options: [
+                "MC → WC → PC → VC → NC → DC",
+                "MC → WC → VC → PC → NC → DC",
+                "WC → MC → VC → PC → NC → DC",
+                "MC → VC → WC → PC → NC → DC"
+            ],
+            answer: 1,
+            explanation: "<strong>정답: 2번</strong><br>3D 파이프라인의 정석 순서입니다.<br>1. 모델 좌표(MC)를 월드(WC)에 배치<br>2. 카메라 기준인 뷰잉 좌표(VC)로 변환<br>3. 투영 좌표(PC)로 변환<br>4. 정규화 장치 좌표(NC)로 변환<br>5. 최종 화면 좌표(DC)로 변환합니다."
+        },
+        {
+            question: "2. [Ch.07] 직교 투영(Orthographic Projection)에 대한 설명으로 틀린 것은?",
+            options: [
+                "원근감이 없어 물체의 거리에 상관없이 크기가 일정하다.",
+                "뷰 볼륨(View Volume)의 형태는 직육면체(Rectangular Box)이다.",
+                "투영선(Projector)들이 투영면에 수직으로 평행하다.",
+                "주로 사실적인 게임 그래픽이나 영화 렌더링에 사용된다."
+            ],
+            answer: 3,
+            explanation: "<strong>정답: 4번</strong><br>사실적인 그래픽이나 게임, 사람의 눈과 같은 효과를 내는 것은 '원근 투영(Perspective Projection)'입니다. 직교 투영은 정확한 치수가 필요한 설계 도면(CAD) 등에 주로 사용됩니다."
+        },
+        {
+            question: "3. [Ch.07] 카메라(UVN) 좌표계를 구성하기 위해 필요한 3가지 요소가 아닌 것은?",
+            options: [
+                "View Point (눈의 위치, P0)",
+                "Look-at Point (바라보는 지점, Pref)",
+                "Field of View (시야각)",
+                "View-Up Vector (위쪽 방향 벡터, V)"
+            ],
+            answer: 2,
+            explanation: "<strong>정답: 3번</strong><br>UVN 좌표계(카메라의 x, y, z축)를 정의하기 위해 필요한 기하학적 정보는 위치(Eye), 바라보는 곳(Look-at), 위쪽 방향(Up)입니다. 시야각(FOV)은 '투영(Projection)' 단계에서 렌즈의 줌인/줌아웃을 결정하는 요소입니다."
+        },
+        {
+            question: "4. [Ch.08] 은면 제거 알고리즘 중 'Z-버퍼(Z-Buffer)' 기법에 대한 설명으로 옳은 것은?",
+            options: [
+                "Object-Space 알고리즘에 해당한다.",
+                "반드시 물체들을 깊이 순서대로 정렬(Sorting)해야 한다.",
+                "추가적인 메모리 공간이 필요하다.",
+                "순환 겹침(Cyclic Overlap) 문제를 해결할 수 없다."
+            ],
+            answer: 2,
+            explanation: "<strong>정답: 3번</strong><br>1. Z-버퍼는 Image-Space(픽셀 단위) 알고리즘입니다.<br>2. 정렬이 필요 없는 것이 가장 큰 장점입니다.<br>3. 깊이 정보를 저장할 버퍼 메모리가 추가로 필요합니다.<br>4. 픽셀 단위로 깊이를 비교하므로 순환 겹침 문제도 완벽하게 해결합니다."
+        },
+        {
+            question: "5. [Ch.08] 후면 제거(Back-Face Culling)를 위해 사용하는 벡터 연산은 무엇인가?",
+            options: [
+                "법선 벡터(N)와 시선 벡터(V)의 내적 (Dot Product)",
+                "법선 벡터(N)와 시선 벡터(V)의 외적 (Cross Product)",
+                "광원 벡터(L)와 법선 벡터(N)의 내적 (Dot Product)",
+                "반사 벡터(R)와 시선 벡터(V)의 내적 (Dot Product)"
+            ],
+            answer: 0,
+            explanation: "<strong>정답: 1번</strong><br>면이 카메라를 향하는지 등지는지를 판단하기 위해 면의 법선(N)과 시선(V)의 내적을 계산합니다.<br>- 3번(N·L)은 Diffuse 조명 계산입니다.<br>- 4번(R·V)은 Specular 조명 계산입니다."
+        },
+        {
+            question: "6. [Ch.09] 퐁 조명 모델(Phong Reflection Model)의 3가지 요소에 해당하지 않는 것은?",
+            options: [
+                "Ambient (주변광)",
+                "Diffuse (난반사/확산광)",
+                "Specular (정반사)",
+                "Emission (방사광)"
+            ],
+            answer: 3,
+            explanation: "<strong>정답: 4번</strong><br>기본적인 퐁 반사 모델은 Ambient + Diffuse + Specular의 합으로 구성됩니다. Emission(자체 발광)은 OpenGL 등에서 추가적으로 더해줄 수는 있지만, 빛의 반사를 다루는 핵심 3요소에는 포함되지 않는 경우가 일반적입니다."
+        },
+        {
+            question: "7. [Ch.09] 정반사(Specular) 하이라이트를 계산할 때, 표면의 매끄러운 정도(Shininess)를 조절하는 지수 'n'값이 커지면 어떤 현상이 발생하는가?",
+            options: [
+                "하이라이트 영역이 넓어지고 흐릿해진다.",
+                "하이라이트 영역이 좁아지고 선명해진다.",
+                "전체적으로 물체가 어두워진다.",
+                "난반사(Diffuse) 성분이 사라진다."
+            ],
+            answer: 1,
+            explanation: "<strong>정답: 2번</strong><br>지수 n은 표면의 거칠기를 나타냅니다. n이 클수록 표면이 매끄러운 거울에 가까워지므로, 빛이 퍼지지 않고 정반사되어 하이라이트가 좁고 날카롭게(선명하게) 맺힙니다."
+        },
+        {
+            question: "8. [Ch.10] 셰이딩 기법 중, '꼭짓점(Vertex)에서 색상을 계산하고 내부는 색상을 보간(Interpolation)'하는 방식은?",
+            options: [
+                "Flat Shading",
+                "Gouraud Shading",
+                "Phong Shading",
+                "Ray Tracing"
+            ],
+            answer: 1,
+            explanation: "<strong>정답: 2번</strong><br>1. Flat: 면 하나를 단색으로 칠함.<br>2. Gouraud: 정점 색상(Intensity)을 구해서 내부를 보간함.<br>3. Phong: 법선 벡터(Normal)를 보간해서 픽셀마다 계산함."
+        },
+        {
+            question: "9. [Ch.10] 퐁 셰이딩(Phong Shading)의 가장 큰 장점은 무엇인가?",
+            options: [
+                "계산 속도가 가장 빠르다.",
+                "마하 밴드(Mach Band) 현상이 매우 심하게 나타난다.",
+                "하이라이트(Specular)를 픽셀 단위로 정확하게 표현한다.",
+                "폴리곤 내부를 단색으로 처리하여 깔끔하다."
+            ],
+            answer: 2,
+            explanation: "<strong>정답: 3번</strong><br>고로 셰이딩은 정점에서만 계산하므로 폴리곤 중앙의 하이라이트가 뭉개질 수 있습니다. 반면 퐁 셰이딩은 픽셀마다 법선을 보간하여 조명을 계산하므로 하이라이트가 매우 정확하고 사실적입니다. 단점은 계산량이 많아 느리다는 것입니다."
+        },
+        {
+            question: "10. [Ch.10] 3D 렌더링 시 물체 경계선이 계단처럼 보이는 현상(Aliasing)을 줄이기 위해, 경계면의 색상을 혼합하여 부드럽게 만드는 기술은?",
+            options: [
+                "Z-Buffering",
+                "Back-Face Culling",
+                "Anti-Aliasing",
+                "Perspective Division"
+            ],
+            answer: 2,
+            explanation: "<strong>정답: 3번</strong><br>앨리어싱(Aliasing)의 반대말인 안티앨리어싱(Anti-Aliasing)입니다. 슈퍼샘플링 등의 기법을 사용하여 픽셀의 색상을 주변과 혼합(Blending)함으로써 계단 현상을 완화합니다."
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    const userAnswers = new Array(quizData.length).fill(null); // 사용자가 선택한 답 저장
+
+    function renderQuestion() {
+        const questionData = quizData[currentQuestionIndex];
+        
+        // 진행상황 업데이트
+        document.getElementById('progress').innerText = `문제 ${currentQuestionIndex + 1} / ${quizData.length}`;
+        
+        // 문제 텍스트
+        document.getElementById('question-text').innerText = questionData.question;
+        
+        // 보기 초기화
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+        
+        // 해설 숨기기
+        const explanationDiv = document.getElementById('explanation');
+        explanationDiv.style.display = 'none';
+        explanationDiv.innerHTML = '';
+
+        // 보기 버튼 생성
+        questionData.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = option;
+            btn.onclick = () => checkAnswer(index);
+            optionsContainer.appendChild(btn);
+        });
+
+        // 이미 푼 문제라면 상태 복원
+        if (userAnswers[currentQuestionIndex] !== null) {
+            showResult(userAnswers[currentQuestionIndex]);
+        }
+
+        // 버튼 활성/비활성 상태 업데이트
+        document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
+        document.getElementById('next-btn').innerText = (currentQuestionIndex === quizData.length - 1) ? '종료' : '다음';
+    }
+
+    function checkAnswer(selectedIndex) {
+        if (userAnswers[currentQuestionIndex] !== null) return; // 이미 풀었으면 중복 클릭 방지
+
+        userAnswers[currentQuestionIndex] = selectedIndex;
+        showResult(selectedIndex);
+    }
+
+    function showResult(selectedIndex) {
+        const questionData = quizData[currentQuestionIndex];
+        const buttons = document.getElementsByClassName('option-btn');
+        const explanationDiv = document.getElementById('explanation');
+
+        // 정답/오답 스타일 적용
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true; // 모든 버튼 비활성화
+            if (i === questionData.answer) {
+                buttons[i].classList.add('correct');
+                buttons[i].innerHTML += " (정답 ⭕)";
+            }
+            if (i === selectedIndex && i !== questionData.answer) {
+                buttons[i].classList.add('incorrect');
+                buttons[i].innerHTML += " (오답 ❌)";
+            }
+        }
+
+        // 해설 표시
+        explanationDiv.innerHTML = questionData.explanation;
+        explanationDiv.style.display = 'block';
+    }
+
+    function changeQuestion(direction) {
+        const newIndex = currentQuestionIndex + direction;
+        if (newIndex >= 0 && newIndex < quizData.length) {
+            currentQuestionIndex = newIndex;
+            renderQuestion();
+        } else if (newIndex === quizData.length) {
+            alert("모든 문제를 풀었습니다! 수고하셨습니다.");
+        }
+    }
+
+    // 초기 실행
+    renderQuestion();
+
+</script>
+
+</body>
+</html>
